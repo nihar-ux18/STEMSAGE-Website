@@ -26,6 +26,7 @@ const navItems = [
     ],
   },
   { label: "Community", path: "/forum" },
+  { label: "Contact", path: "/contact" },
 ];
 
 /* ─── Desktop Dropdown ─── */

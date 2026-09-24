@@ -11,6 +11,7 @@ import Store from "./pages/Store";
 import Learning from "./pages/Learning";
 import Projects from "./pages/Projects";
 import StudentProjects from "./pages/StudentProjects";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/learning" element={<Learning />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/student-projects" element={<StudentProjects />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
 
     </BrowserRouter>
