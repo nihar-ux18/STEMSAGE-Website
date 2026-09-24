@@ -1,5 +1,118 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
-    return <footer className="relative overflow-hidden bg-[#0f172a] text-white"><div className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.35) 1px, transparent 1px)", backgroundSize: "52px 52px" }} /><div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full border-[18px] border-red-500/10" /><div className="pointer-events-none absolute -bottom-32 -right-28 h-72 w-72 rounded-full border-[18px] border-white/5" /><div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10"><div className="grid gap-12 md:grid-cols-4"><div className="md:pr-8"><img src="/images/logo.png" alt="STEMSAGE" className="mb-5 h-12 w-auto" /><p className="max-w-sm text-sm leading-7 text-slate-400">Learn, build and innovate with STEMSAGE. Practical learning experiences designed to prepare learners for the future.</p><div className="mt-6 flex items-center gap-3"><span className="h-px w-10 bg-red-500" /><span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">Learn • Build • Innovate</span></div></div><div><h3 className="mb-5 text-sm font-bold uppercase tracking-[0.15em] text-white">Quick Links</h3><div className="space-y-3 text-sm text-slate-400"><a href="/" className="block hover:text-white">Home</a><a href="/about" className="block hover:text-white">About</a><a href="/courses" className="block hover:text-white">Courses</a><a href="/services" className="block hover:text-white">Services</a></div></div><div><h3 className="mb-5 text-sm font-bold uppercase tracking-[0.15em] text-white">Resources</h3><div className="space-y-3 text-sm text-slate-400"><a href="/projects" className="block hover:text-white">Projects</a><a href="/student-projects" className="block hover:text-white">Student Projects</a><a href="/workshops" className="block hover:text-white">Workshops</a><a href="/store" className="block hover:text-white">Our Store</a></div></div><div><h3 className="mb-5 text-sm font-bold uppercase tracking-[0.15em] text-white">Support</h3><div className="space-y-3 text-sm text-slate-400"><a href="mailto:stemsage.techworld.llp@gmail.com" className="block hover:text-white">Contact Us</a><a href="/forum" className="block hover:text-white">Our Forum</a></div></div></div><div className="mt-14 flex flex-col justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row"><span>© 2026 STEMSAGE. All rights reserved.</span><span>STEM EDUCATION • TECHNOLOGY • INNOVATION</span></div></div></footer>;
+  return (
+    <footer className="relative overflow-hidden bg-[#0f172a] text-white">
+      {/* Background grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.35) 1px, transparent 1px)",
+          backgroundSize: "52px 52px",
+        }}
+      />
+      <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full border-[18px] border-red-500/10" />
+      <div className="pointer-events-none absolute -bottom-32 -right-28 h-72 w-72 rounded-full border-[18px] border-white/5" />
+
+      <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
+        <div className="grid gap-12 md:grid-cols-4">
+          {/* Brand info */}
+          <div className="md:pr-8">
+            <Link
+              to="/"
+              className="mb-5 inline-flex items-center gap-3 transition-opacity hover:opacity-90"
+            >
+              <img
+                src="/images/logo.png"
+                alt="STEMSAGE"
+                className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+              <span className="text-xl font-extrabold leading-none tracking-tight text-white">
+                STEMSAGE
+              </span>
+            </Link>
+            <p className="max-w-sm text-sm leading-7 text-slate-400">
+              Learn, build and innovate with STEMSAGE. Practical learning
+              experiences designed to prepare learners for the future.
+            </p>
+            <div className="mt-6 flex items-center gap-3">
+              <span className="h-px w-10 bg-red-500" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500">
+                Learn • Build • Innovate
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="mb-5 text-sm font-bold uppercase tracking-[0.15em] text-white">
+              Quick Links
+            </h3>
+            <div className="space-y-3 text-sm text-slate-400">
+              <Link to="/" className="block hover:text-white">
+                Home
+              </Link>
+              <Link to="/about" className="block hover:text-white">
+                About
+              </Link>
+              <Link to="/courses" className="block hover:text-white">
+                Courses
+              </Link>
+              <Link to="/services" className="block hover:text-white">
+                Services
+              </Link>
+            </div>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h3 className="mb-5 text-sm font-bold uppercase tracking-[0.15em] text-white">
+              Resources
+            </h3>
+            <div className="space-y-3 text-sm text-slate-400">
+              <Link to="/projects" className="block hover:text-white">
+                Projects
+              </Link>
+              <Link to="/student-projects" className="block hover:text-white">
+                Student Projects
+              </Link>
+              <Link to="/workshops" className="block hover:text-white">
+                Workshops
+              </Link>
+              <Link to="/store" className="block hover:text-white">
+                Our Store
+              </Link>
+            </div>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="mb-5 text-sm font-bold uppercase tracking-[0.15em] text-white">
+              Support
+            </h3>
+            <div className="space-y-3 text-sm text-slate-400">
+              <Link to="/contact" className="block hover:text-white">
+                Contact Us
+              </Link>
+              <Link to="/forum" className="block hover:text-white">
+                Our Forum
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col justify-between gap-4 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row">
+          <span>© 2026 STEMSAGE. All rights reserved.</span>
+          <span>STEM EDUCATION • TECHNOLOGY • INNOVATION</span>
+        </div>
+      </div>
+    </footer>
+  );
 }
 
 export default Footer;
+
