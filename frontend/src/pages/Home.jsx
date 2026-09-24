@@ -286,18 +286,15 @@ function Home() {
                     <div
                         className="
                             absolute
-                            left-[7%]
-                            top-[58%]
+                            bottom-[12%]
+                            left-1/2
                             z-20
                             flex
-                            max-w-[85%]
+                            -translate-x-1/2
                             flex-wrap
                             items-center
+                            justify-center
                             gap-3
-                            sm:left-[8%]
-                            sm:top-[60%]
-                            md:left-[9%]
-                            lg:left-[10%]
                         "
                     >
                         <Link
@@ -349,6 +346,67 @@ function Home() {
                         >
                             Book a call
                         </Link>
+                    </div>
+
+                    {/* =================================================
+                        SCROLL DOWN INDICATOR
+                    ================================================== */}
+                    <div
+                        style={{
+                            position: "absolute",
+                            bottom: "3%",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            zIndex: 20,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            gap: "4px",
+                        }}
+                    >
+                        <span
+                            style={{
+                                fontSize: "10px",
+                                fontWeight: "700",
+                                letterSpacing: "0.15em",
+                                color: "#0f172a",
+                                textShadow: "0 1px 4px rgba(255,255,255,0.6)",
+                                textTransform: "uppercase",
+                            }}
+                        >
+                            Scroll Down
+                        </span>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1px" }}>
+                            {[0, 1, 2].map((i) => (
+                                <svg
+                                    key={i}
+                                    width="16"
+                                    height="9"
+                                    viewBox="0 0 16 9"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    style={{
+                                        animation: "scrollBounce 1.4s ease-in-out infinite",
+                                        animationDelay: `${i * 0.18}s`,
+                                        opacity: 1 - i * 0.3,
+                                    }}
+                                >
+                                    <path
+                                        d="M1 1L8 8L15 1"
+                                        stroke="#0f172a"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            ))}
+                        </div>
+                        <style>{`
+                            @keyframes scrollBounce {
+                                0%, 100% { transform: translateY(0); opacity: 0.9; }
+                                50% { transform: translateY(5px); opacity: 0.35; }
+                            }
+                        `}</style>
                     </div>
 
                     {/* =================================================
