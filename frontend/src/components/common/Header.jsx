@@ -130,7 +130,15 @@ function Header() {
 
   const isGroupActive = (item) => {
     if (isActiveRoute(item.path)) return true;
-    if (item.dropdown) return item.dropdown.some((d) => d.path && isActiveRoute(d.path));
+    if (item.dropdown) {
+      // Only count a dropdown child as "active" for this parent
+      // if that child's path is NOT a standalone top-level nav item.
+      // (prevents /projects from activating both Learning and Projects tabs)
+      const topLevelPaths = navItems.map((n) => n.path);
+      return item.dropdown.some(
+        (d) => d.path && !topLevelPaths.includes(d.path) && isActiveRoute(d.path)
+      );
+    }
     return false;
   };
 
