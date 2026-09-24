@@ -17,7 +17,14 @@ const navItems = [
     ],
   },
   { label: "Services", path: "/services" },
-  { label: "Projects", path: "/projects" },
+  {
+    label: "Projects",
+    path: "/projects",
+    dropdown: [
+      { label: "Our Projects", path: "/projects", desc: "STEMSAGE institutional projects", icon: "🚀" },
+      { label: "Student Projects", path: "/student-projects", desc: "Projects built by our students", icon: "🎓" },
+    ],
+  },
   { label: "Community", path: "/forum" },
 ];
 
