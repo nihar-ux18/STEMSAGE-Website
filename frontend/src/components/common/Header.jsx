@@ -64,9 +64,9 @@ function Header() {
           </Link>
 
           {/* Technical Spec Badge */}
-          <span className="hidden sm:inline-flex items-center gap-1 rounded border border-slate-200 bg-slate-100 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+          {/* <span className="hidden sm:inline-flex items-center gap-1 rounded border border-slate-200 bg-slate-100 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-slate-500">
             v2.4 // STUDIO-SPEC
-          </span>
+          </span> */}
         </div>
 
         {/* Desktop Navigation Links */}
@@ -77,9 +77,9 @@ function Header() {
               <Link
                 key={item.label}
                 to={item.path}
-                className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1 ${
+              className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
                   active
-                    ? "font-bold text-slate-900"
+                    ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
                     : "font-medium text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -99,13 +99,13 @@ function Header() {
             GET STARTED
           </Link>
           
-          <button
+          {/* <button
             type="button"
             aria-label="User profile account"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
           >
             <User size={16} />
-          </button>
+          </button> */}
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -126,11 +126,11 @@ function Header() {
       {isMobileMenuOpen && (
         <div className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col justify-between border-t border-slate-200 bg-white px-6 py-6 lg:hidden overflow-y-auto shadow-2xl">
           <div className="space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            {/* <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                 v2.4 // STUDIO-SPEC
               </span>
-            </div>
+            </div> */}
 
             <nav className="flex flex-col space-y-1" aria-label="Mobile Navigation">
               {navItems.map((item) => {
@@ -142,7 +142,7 @@ function Header() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex h-11 items-center justify-between rounded-lg px-3 text-base transition-colors ${
                       active
-                        ? "bg-red-50 font-bold text-red-600"
+                        ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
                         : "font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                     }`}
                   >
@@ -163,12 +163,12 @@ function Header() {
               GET STARTED
             </Link>
 
-            <div className="flex items-center justify-between px-2 text-xs font-mono text-slate-500">
+            {/* <div className="flex items-center justify-between px-2 text-xs font-mono text-slate-500">
               <span>STEMSAGE TECHWORLD</span>
               <div className="flex items-center gap-1.5 text-slate-700 font-semibold">
                 <User size={14} /> Account
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
