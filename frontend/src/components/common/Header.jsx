@@ -73,22 +73,6 @@ function Header() {
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main Navigation">
           {navItems.map((item) => {
             const active = isActiveRoute(item.path);
-            const isNonExistent = item.path === "/learning" || item.path === "/projects";
-
-            if (isNonExistent) {
-              return (
-                <button
-                  type="button"
-                  key={item.label}
-                  onClick={(e) => e.preventDefault()}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-1"
-                >
-                  {item.label}
-                  {item.hasDropdown && <ChevronDown size={14} className="text-slate-400" />}
-                </button>
-              );
-            }
-
             return (
               <Link
                 key={item.label}
@@ -151,20 +135,6 @@ function Header() {
             <nav className="flex flex-col space-y-1" aria-label="Mobile Navigation">
               {navItems.map((item) => {
                 const active = isActiveRoute(item.path);
-                const isNonExistent = item.path === "/learning" || item.path === "/projects";
-
-                if (isNonExistent) {
-                  return (
-                    <div
-                      key={item.label}
-                      className="flex h-11 items-center justify-between px-3 text-base font-medium text-slate-400"
-                    >
-                      <span>{item.label}</span>
-                      {item.hasDropdown && <ChevronDown size={16} className="text-slate-400" />}
-                    </div>
-                  );
-                }
-
                 return (
                   <Link
                     key={item.label}
