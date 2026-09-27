@@ -11,27 +11,22 @@ const innovationDoors = [
     {
         name: "Electronics",
         gif: electronicsGif,
-        link: "/courses",
     },
     {
         name: "Robotics",
         gif: roboticsGif,
-        link: "/workshops",
     },
     {
         name: "Internet of Things",
         gif: iotGif,
-        link: "/projects",
     },
     {
         name: "3D Printing",
         gif: printingGif,
-        link: "/services",
     },
     {
         name: "Programming",
         gif: programmingGif,
-        link: "/courses",
     },
 ];
 
@@ -51,9 +46,8 @@ function DoorsOfInnovation() {
                 {/* 5 Items Row */}
                 <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-6 items-start text-center">
                     {innovationDoors.map((item, index) => (
-                        <Link
+                        <div
                             key={index}
-                            to={item.link}
                             className="group flex flex-col items-center justify-start p-3 transition-all duration-300 hover:-translate-y-1.5"
                         >
                             {/* Animated GIF Container */}
@@ -69,7 +63,7 @@ function DoorsOfInnovation() {
                             <span className="mt-6 text-base sm:text-lg font-bold text-slate-800 group-hover:text-red-600 transition-colors leading-snug max-w-[140px]">
                                 {item.name}
                             </span>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>
