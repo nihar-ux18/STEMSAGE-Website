@@ -110,7 +110,7 @@ function Home() {
                  * The minimum height prevents the hero from
                  * becoming too short on smaller screens.
                  */}
-                <div className="relative h-[55vh] min-h-[380px] max-h-[480px] w-full sm:h-[65vh] sm:min-h-[450px] sm:max-h-[520px] md:h-[70vh] md:max-h-[560px] lg:h-[75vh] lg:max-h-[600px] xl:max-h-[640px]">
+                <div className="relative h-[68vh] min-h-[480px] w-full sm:h-[74vh] sm:min-h-[520px] md:h-[78vh] lg:h-[89vh] lg:min-h-[600px]">
                     {/* =================================================
                         IMAGE TRACK
                     ================================================== */}
@@ -127,7 +127,7 @@ function Home() {
                         {heroImages.map((image, index) => (
                             <div
                                 key={`${image}-${index}`}
-                                className="relative flex h-full w-full min-w-full flex-shrink-0 items-center justify-center bg-[#f4f6f8]"
+                                className="relative h-full w-full min-w-full flex-shrink-0 bg-black"
                             >
                                 <img
                                     src={image}
@@ -137,11 +137,13 @@ function Home() {
                                         w-full
                                         object-contain
                                         object-center
+                                        opacity-100
+                                        sm:object-cover
                                     "
                                 />
 
-                                {/* Subtle overlay */}
-                                <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+                                {/* Blackish image overlay */}
+                                <div className="absolute inset-0 bg-black/10" />
                             </div>
                         ))}
                     </div>
@@ -226,7 +228,7 @@ function Home() {
                     <div
                         className="
                             absolute
-                            bottom-10
+                            bottom-[12%]
                             left-1/2
                             z-20
                             flex
@@ -235,8 +237,6 @@ function Home() {
                             items-center
                             justify-center
                             gap-3
-                            sm:bottom-12
-                            md:bottom-14
                         "
                     >
                         <Link
@@ -296,14 +296,14 @@ function Home() {
                     <div
                         style={{
                             position: "absolute",
-                            bottom: "6px",
+                            bottom: "3%",
                             left: "50%",
                             transform: "translateX(-50%)",
                             zIndex: 20,
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            gap: "2px",
+                            gap: "4px",
                         }}
                     >
                         <span
