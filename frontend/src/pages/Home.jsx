@@ -2,64 +2,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Footer from "../components/common/Footer";
 
-const innovationDoors = [
-    {
-        number: "01",
-        title: "Electronics",
-        description: "Master circuits, components and embedded systems.",
-        icon: "fa-microchip",
-        color: "text-red-500",
-    },
-    {
-        number: "02",
-        title: "Robotics",
-        description: "Build intelligent machines and autonomous systems.",
-        icon: "fa-robot",
-        color: "text-cyan-500",
-    },
-    {
-        number: "03",
-        title: "Internet of Things",
-        description: "Create connected and smart ecosystems.",
-        icon: "fa-wifi",
-        color: "text-blue-500",
-    },
-    {
-        number: "04",
-        title: "3D Design",
-        description: "Turn ideas into real-world digital designs.",
-        icon: "fa-cube",
-        color: "text-green-500",
-    },
-    {
-        number: "05",
-        title: "Programming",
-        description: "Learn coding and build powerful applications.",
-        icon: "fa-code",
-        color: "text-yellow-500",
-    },
-];
-
-const testimonials = [
-    {
-        quote:
-            "The workshops by STEMSAGE not only inspired our students but also provided them with the technical foundation to excel at the national level.",
-        author: "Dr. Sharma",
-        role: "Principal, SVKM School",
-    },
-    {
-        quote:
-            "STEMSAGE has been instrumental in bridging the gap between academic knowledge and practical application.",
-        author: "Prof. Patel",
-        role: "Head of Engineering, RCPIT",
-    },
-    {
-        quote:
-            "My son has become more curious and confident after attending STEMSAGE workshops.",
-        author: "Ms. Reddy",
-        role: "Parent",
-    },
-];
 
 function Home() {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -168,7 +110,7 @@ function Home() {
                  * The minimum height prevents the hero from
                  * becoming too short on smaller screens.
                  */}
-                <div className="relative h-[68vh] min-h-[480px] w-full sm:h-[74vh] sm:min-h-[520px] md:h-[78vh] lg:h-[89vh] lg:min-h-[600px]">
+                <div className="relative h-[55vh] min-h-[380px] max-h-[480px] w-full sm:h-[65vh] sm:min-h-[450px] sm:max-h-[520px] md:h-[70vh] md:max-h-[560px] lg:h-[75vh] lg:max-h-[600px] xl:max-h-[640px]">
                     {/* =================================================
                         IMAGE TRACK
                     ================================================== */}
@@ -185,7 +127,7 @@ function Home() {
                         {heroImages.map((image, index) => (
                             <div
                                 key={`${image}-${index}`}
-                                className="relative h-full w-full min-w-full flex-shrink-0 bg-black"
+                                className="relative flex h-full w-full min-w-full flex-shrink-0 items-center justify-center bg-[#f4f6f8]"
                             >
                                 <img
                                     src={image}
@@ -195,13 +137,11 @@ function Home() {
                                         w-full
                                         object-contain
                                         object-center
-                                        opacity-100
-                                        sm:object-cover
                                     "
                                 />
 
-                                {/* Blackish image overlay */}
-                                <div className="absolute inset-0 bg-black/10" />
+                                {/* Subtle overlay */}
+                                <div className="absolute inset-0 bg-black/5 pointer-events-none" />
                             </div>
                         ))}
                     </div>
@@ -286,7 +226,7 @@ function Home() {
                     <div
                         className="
                             absolute
-                            bottom-[12%]
+                            bottom-10
                             left-1/2
                             z-20
                             flex
@@ -295,6 +235,8 @@ function Home() {
                             items-center
                             justify-center
                             gap-3
+                            sm:bottom-12
+                            md:bottom-14
                         "
                     >
                         <Link
@@ -354,14 +296,14 @@ function Home() {
                     <div
                         style={{
                             position: "absolute",
-                            bottom: "3%",
+                            bottom: "6px",
                             left: "50%",
                             transform: "translateX(-50%)",
                             zIndex: 20,
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            gap: "4px",
+                            gap: "2px",
                         }}
                     >
                         <span
@@ -432,29 +374,30 @@ function Home() {
             </section>
 
             {/* =========================================================
-    WELCOME TO STEMSAGE / INTRODUCTION SECTION
+    WELCOME TO STEMSAGE / INTRODUCTION SECTION (COMMENTED OUT)
 ========================================================= */}
-            <section className="relative min-h-[760px] overflow-hidden bg-white">
+            {/*
+                <section className="relative min-h-[760px] overflow-hidden bg-white">
 
-                {/* =====================================================
+                    {/* =====================================================
         BACKGROUND GRID
-    ====================================================== */}
-                <div
-                    className="pointer-events-none absolute inset-0 opacity-60"
-                    style={{
-                        backgroundImage: `
+    ====================================================== * /}
+                    <div
+                        className="pointer-events-none absolute inset-0 opacity-60"
+                        style={{
+                            backgroundImage: `
                 linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px)
             `,
-                        backgroundSize: "32px 32px",
-                    }}
-                />
+                            backgroundSize: "32px 32px",
+                        }}
+                    />
 
-                {/* =====================================================
+                    {/* =====================================================
         TOP LEFT RED GLOW
-    ====================================================== */}
-                <div
-                    className="
+    ====================================================== * /}
+                    <div
+                        className="
             pointer-events-none absolute
             -left-28 -top-24
             h-[350px] w-[350px]
@@ -462,10 +405,10 @@ function Home() {
             bg-red-400/25
             blur-3xl
         "
-                />
+                    />
 
-                <div
-                    className="
+                    <div
+                        className="
             pointer-events-none absolute
             -left-16 -top-16
             h-[300px] w-[300px]
@@ -473,13 +416,13 @@ function Home() {
             border-[18px]
             border-red-100/60
         "
-                />
+                    />
 
-                {/* =====================================================
+                    {/* =====================================================
         BOTTOM RIGHT RED GLOW
-    ====================================================== */}
-                <div
-                    className="
+    ====================================================== * /}
+                    <div
+                        className="
             pointer-events-none absolute
             -right-32 bottom-20
             h-[380px] w-[380px]
@@ -487,10 +430,10 @@ function Home() {
             bg-red-400/20
             blur-3xl
         "
-                />
+                    />
 
-                <div
-                    className="
+                    <div
+                        className="
             pointer-events-none absolute
             -right-16 bottom-28
             h-[280px] w-[280px]
@@ -498,32 +441,32 @@ function Home() {
             border-[16px]
             border-red-100/60
         "
-                />
+                    />
 
-                {/* =====================================================
+                    {/* =====================================================
         DECORATIVE PLUS SYMBOLS
-    ====================================================== */}
-                <span className="pointer-events-none absolute left-[23%] top-[18%] text-2xl font-light text-red-500">
-                    +
-                </span>
+    ====================================================== * /}
+                    <span className="pointer-events-none absolute left-[23%] top-[18%] text-2xl font-light text-red-500">
+                        +
+                    </span>
 
-                <span className="pointer-events-none absolute right-[20%] top-[20%] text-2xl font-light text-red-500">
-                    +
-                </span>
+                    <span className="pointer-events-none absolute right-[20%] top-[20%] text-2xl font-light text-red-500">
+                        +
+                    </span>
 
-                <span className="pointer-events-none absolute left-[19%] top-[48%] text-2xl font-light text-red-500">
-                    +
-                </span>
+                    <span className="pointer-events-none absolute left-[19%] top-[48%] text-2xl font-light text-red-500">
+                        +
+                    </span>
 
-                <span className="pointer-events-none absolute right-[27%] top-[45%] text-2xl font-light text-red-500">
-                    +
-                </span>
+                    <span className="pointer-events-none absolute right-[27%] top-[45%] text-2xl font-light text-red-500">
+                        +
+                    </span>
 
-                {/* =====================================================
+                    {/* =====================================================
         DECORATIVE DOT MATRIX - TOP RIGHT
-    ====================================================== */}
-                <div
-                    className="
+    ====================================================== * /}
+                    <div
+                        className="
             pointer-events-none absolute
             right-[15%] top-[7%]
             hidden
@@ -531,18 +474,18 @@ function Home() {
             opacity-40
             sm:block
         "
-                    style={{
-                        backgroundImage:
-                            "radial-gradient(circle, #64748b 1.5px, transparent 1.5px)",
-                        backgroundSize: "10px 10px",
-                    }}
-                />
+                        style={{
+                            backgroundImage:
+                                "radial-gradient(circle, #64748b 1.5px, transparent 1.5px)",
+                            backgroundSize: "10px 10px",
+                        }}
+                    />
 
-                {/* =====================================================
+                    {/* =====================================================
         DECORATIVE DOT MATRIX - LEFT
-    ====================================================== */}
-                <div
-                    className="
+    ====================================================== * /}
+                    <div
+                        className="
             pointer-events-none absolute
             left-[11%] top-[58%]
             hidden
@@ -550,102 +493,102 @@ function Home() {
             opacity-35
             sm:block
         "
-                    style={{
-                        backgroundImage:
-                            "radial-gradient(circle, #64748b 1.5px, transparent 1.5px)",
-                        backgroundSize: "10px 10px",
-                    }}
-                />
+                        style={{
+                            backgroundImage:
+                                "radial-gradient(circle, #64748b 1.5px, transparent 1.5px)",
+                            backgroundSize: "10px 10px",
+                        }}
+                    />
 
-                {/* =====================================================
+                    {/* =====================================================
         DECORATIVE CIRCUIT LINES - LEFT
-    ====================================================== */}
-                <svg
-                    className="pointer-events-none absolute left-0 top-[24%] hidden h-64 w-44 opacity-30 lg:block"
-                    viewBox="0 0 180 260"
-                    fill="none"
-                >
-                    <path
-                        d="M0 30H45V75H95V120H145"
-                        stroke="#64748b"
-                        strokeWidth="1.5"
-                    />
+    ====================================================== * /}
+                    <svg
+                        className="pointer-events-none absolute left-0 top-[24%] hidden h-64 w-44 opacity-30 lg:block"
+                        viewBox="0 0 180 260"
+                        fill="none"
+                    >
+                        <path
+                            d="M0 30H45V75H95V120H145"
+                            stroke="#64748b"
+                            strokeWidth="1.5"
+                        />
 
-                    <path
-                        d="M0 130H30V165H75V210H140"
-                        stroke="#64748b"
-                        strokeWidth="1.5"
-                    />
+                        <path
+                            d="M0 130H30V165H75V210H140"
+                            stroke="#64748b"
+                            strokeWidth="1.5"
+                        />
 
-                    <path
-                        d="M0 215H55V240H110"
-                        stroke="#64748b"
-                        strokeWidth="1.5"
-                    />
+                        <path
+                            d="M0 215H55V240H110"
+                            stroke="#64748b"
+                            strokeWidth="1.5"
+                        />
 
-                    <circle cx="45" cy="75" r="4" fill="#64748b" />
-                    <circle cx="95" cy="120" r="4" fill="#64748b" />
-                    <circle cx="30" cy="165" r="4" fill="#64748b" />
-                    <circle cx="75" cy="210" r="4" fill="#64748b" />
-                </svg>
+                        <circle cx="45" cy="75" r="4" fill="#64748b" />
+                        <circle cx="95" cy="120" r="4" fill="#64748b" />
+                        <circle cx="30" cy="165" r="4" fill="#64748b" />
+                        <circle cx="75" cy="210" r="4" fill="#64748b" />
+                    </svg>
 
-                {/* =====================================================
+                    {/* =====================================================
         DECORATIVE CIRCUIT LINES - RIGHT
-    ====================================================== */}
-                <svg
-                    className="pointer-events-none absolute right-0 top-[17%] hidden h-72 w-56 opacity-30 lg:block"
-                    viewBox="0 0 220 300"
-                    fill="none"
-                >
-                    <path
-                        d="M220 30H175L140 65H95L60 100H0"
-                        stroke="#64748b"
-                        strokeWidth="1.5"
-                    />
+    ====================================================== * /}
+                    <svg
+                        className="pointer-events-none absolute right-0 top-[17%] hidden h-72 w-56 opacity-30 lg:block"
+                        viewBox="0 0 220 300"
+                        fill="none"
+                    >
+                        <path
+                            d="M220 30H175L140 65H95L60 100H0"
+                            stroke="#64748b"
+                            strokeWidth="1.5"
+                        />
 
-                    <path
-                        d="M220 100H185L145 140H110L70 180H25"
-                        stroke="#64748b"
-                        strokeWidth="1.5"
-                    />
+                        <path
+                            d="M220 100H185L145 140H110L70 180H25"
+                            stroke="#64748b"
+                            strokeWidth="1.5"
+                        />
 
-                    <path
-                        d="M220 185H175L135 225H90L55 260H10"
-                        stroke="#64748b"
-                        strokeWidth="1.5"
-                    />
+                        <path
+                            d="M220 185H175L135 225H90L55 260H10"
+                            stroke="#64748b"
+                            strokeWidth="1.5"
+                        />
 
-                    <circle cx="175" cy="30" r="4" fill="#64748b" />
-                    <circle cx="140" cy="65" r="4" fill="#64748b" />
-                    <circle cx="145" cy="140" r="4" fill="#64748b" />
-                    <circle cx="135" cy="225" r="4" fill="#64748b" />
-                </svg>
+                        <circle cx="175" cy="30" r="4" fill="#64748b" />
+                        <circle cx="140" cy="65" r="4" fill="#64748b" />
+                        <circle cx="145" cy="140" r="4" fill="#64748b" />
+                        <circle cx="135" cy="225" r="4" fill="#64748b" />
+                    </svg>
 
-                {/* =====================================================
+                    {/* =====================================================
         MAIN CONTENT
-    ====================================================== */}
-                <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl flex-col items-center px-5 pb-12 pt-20 text-center sm:px-8 sm:pt-24 lg:pt-24">
+    ====================================================== * /}
+                    <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl flex-col items-center px-5 pb-12 pt-20 text-center sm:px-8 sm:pt-24 lg:pt-24">
 
-                    {/* =================================================
+                        {/* =================================================
             LABEL
-        ================================================== */}
-                    <div className="flex items-center gap-5">
+        ================================================== * /}
+                        <div className="flex items-center gap-5">
 
-                        <span className="h-px w-10 bg-red-500 sm:w-14" />
+                            <span className="h-px w-10 bg-red-500 sm:w-14" />
 
-                        <span className="text-[11px] font-bold uppercase tracking-[0.35em] text-red-500 sm:text-sm">
-                            Welcome to STEMSAGE
-                        </span>
+                            <span className="text-[11px] font-bold uppercase tracking-[0.35em] text-red-500 sm:text-sm">
+                                Welcome to STEMSAGE
+                            </span>
 
-                        <span className="h-px w-10 bg-red-500 sm:w-14" />
+                            <span className="h-px w-10 bg-red-500 sm:w-14" />
 
-                    </div>
+                        </div>
 
-                    {/* =================================================
+                        {/* =================================================
             MAIN HEADING
-        ================================================== */}
-                    <h2
-                        className="
+        ================================================== * /}
+                        <h2
+                            className="
                 mt-8
                 max-w-5xl
                 text-4xl
@@ -657,37 +600,37 @@ function Home() {
                 md:text-6xl
                 lg:text-[68px]
             "
-                    >
-                        <span className="block">
-                            Where curiosity
-                        </span>
-
-                        <span className="block">
-                            becomes{" "}
-                            <span className="text-red-500">
-                                innovation
+                        >
+                            <span className="block">
+                                Where curiosity
                             </span>
-                        </span>
-                    </h2>
 
-                    {/* =================================================
+                            <span className="block">
+                                becomes{" "}
+                                <span className="text-red-500">
+                                    innovation
+                                </span>
+                            </span>
+                        </h2>
+
+                        {/* =================================================
             SMALL RED DIVIDER
-        ================================================== */}
-                    <div className="mt-7 flex items-center gap-4">
+        ================================================== * /}
+                        <div className="mt-7 flex items-center gap-4">
 
-                        <span className="h-px w-10 bg-red-500" />
+                            <span className="h-px w-10 bg-red-500" />
 
-                        <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
+                            <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
 
-                        <span className="h-px w-10 bg-red-500" />
+                            <span className="h-px w-10 bg-red-500" />
 
-                    </div>
+                        </div>
 
-                    {/* =================================================
+                        {/* =================================================
             DESCRIPTION
-        ================================================== */}
-                    <p
-                        className="
+        ================================================== * /}
+                        <p
+                            className="
                 mt-7
                 max-w-3xl
                 text-sm
@@ -698,17 +641,17 @@ function Home() {
                 sm:leading-8
                 lg:text-lg
             "
-                    >
-                        STEMSAGE provides practical learning experiences across science,
-                        technology, engineering and mathematics. Our programs focus on
-                        hands-on learning, creativity and real-world problem solving.
-                    </p>
+                        >
+                            STEMSAGE provides practical learning experiences across science,
+                            technology, engineering and mathematics. Our programs focus on
+                            hands-on learning, creativity and real-world problem solving.
+                        </p>
 
-                    {/* =================================================
+                        {/* =================================================
             FEATURE CARDS
-        ================================================== */}
-                    <div
-                        className="
+        ================================================== * /}
+                        <div
+                            className="
                 mt-12
                 grid
                 w-full
@@ -717,13 +660,13 @@ function Home() {
                 gap-5
                 sm:grid-cols-3
             "
-                    >
+                        >
 
-                        {/* =============================================
+                            {/* =============================================
                 EXPLORE
-            ============================================== */}
-                        <div
-                            className="
+            ============================================== * /}
+                            <div
+                                className="
                     group
                     relative
                     min-h-[285px]
@@ -741,16 +684,16 @@ function Home() {
                     hover:border-red-200
                     hover:shadow-[0_18px_45px_rgba(15,23,42,0.10)]
                 "
-                        >
+                            >
 
-                            {/* Number */}
-                            <span className="absolute right-6 top-6 text-xl font-bold text-slate-300">
-                                01
-                            </span>
+                                {/* Number * /}
+                                <span className="absolute right-6 top-6 text-xl font-bold text-slate-300">
+                                    01
+                                </span>
 
-                            {/* Icon */}
-                            <div
-                                className="
+                                {/* Icon * /}
+                                <div
+                                    className="
                         flex
                         h-16
                         w-16
@@ -763,41 +706,41 @@ function Home() {
                         duration-300
                         group-hover:scale-110
                     "
-                            >
-                                <svg
-                                    width="32"
-                                    height="32"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.8"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
                                 >
-                                    <path d="M9 3h6" />
-                                    <path d="M10 3v4l-4.5 8.5A3 3 0 0 0 8.15 20h7.7a3 3 0 0 0 2.65-4.5L14 7V3" />
-                                    <path d="M8 14h8" />
-                                    <path d="M9 17h6" />
-                                </svg>
+                                    <svg
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.8"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M9 3h6" />
+                                        <path d="M10 3v4l-4.5 8.5A3 3 0 0 0 8.15 20h7.7a3 3 0 0 0 2.65-4.5L14 7V3" />
+                                        <path d="M8 14h8" />
+                                        <path d="M9 17h6" />
+                                    </svg>
+                                </div>
+
+                                <h3 className="mt-7 text-2xl font-extrabold tracking-tight text-slate-950">
+                                    Explore
+                                </h3>
+
+                                <p className="mt-3 max-w-[220px] text-base leading-7 text-slate-500">
+                                    Discover new ideas and explore endless possibilities.
+                                </p>
+
+                                <div className="absolute bottom-7 left-6 h-1.5 w-10 rounded-full bg-red-500 transition-all duration-300 group-hover:w-16" />
+
                             </div>
 
-                            <h3 className="mt-7 text-2xl font-extrabold tracking-tight text-slate-950">
-                                Explore
-                            </h3>
-
-                            <p className="mt-3 max-w-[220px] text-base leading-7 text-slate-500">
-                                Discover new ideas and explore endless possibilities.
-                            </p>
-
-                            <div className="absolute bottom-7 left-6 h-1.5 w-10 rounded-full bg-red-500 transition-all duration-300 group-hover:w-16" />
-
-                        </div>
-
-                        {/* =============================================
+                            {/* =============================================
                 BUILD
-            ============================================== */}
-                        <div
-                            className="
+            ============================================== * /}
+                            <div
+                                className="
                     group
                     relative
                     min-h-[285px]
@@ -815,16 +758,16 @@ function Home() {
                     hover:border-slate-300
                     hover:shadow-[0_18px_45px_rgba(15,23,42,0.10)]
                 "
-                        >
+                            >
 
-                            {/* Number */}
-                            <span className="absolute right-6 top-6 text-xl font-bold text-slate-300">
-                                02
-                            </span>
+                                {/* Number * /}
+                                <span className="absolute right-6 top-6 text-xl font-bold text-slate-300">
+                                    02
+                                </span>
 
-                            {/* Icon */}
-                            <div
-                                className="
+                                {/* Icon * /}
+                                <div
+                                    className="
                         flex
                         h-16
                         w-16
@@ -837,39 +780,39 @@ function Home() {
                         duration-300
                         group-hover:scale-110
                     "
-                            >
-                                <svg
-                                    width="32"
-                                    height="32"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.8"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
                                 >
-                                    <circle cx="12" cy="12" r="3" />
-                                    <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.41 1.41-.06-.06A1.7 1.7 0 0 0 16.45 18a1.7 1.7 0 0 0-1.45 1.7V20h-2v-.3A1.7 1.7 0 0 0 11.55 18a1.7 1.7 0 0 0-1.88.34l-.06.06-1.41-1.41.06-.06A1.7 1.7 0 0 0 8 15.05a1.7 1.7 0 0 0-1.7-1.45H6v-2h.3A1.7 1.7 0 0 0 8 10.15a1.7 1.7 0 0 0-.34-1.88L7.6 8.21l1.41-1.41.06.06A1.7 1.7 0 0 0 10.95 7a1.7 1.7 0 0 0 1.45-1.7V5h2v.3A1.7 1.7 0 0 0 15.85 7a1.7 1.7 0 0 0 1.88-.34l.06-.06 1.41 1.41-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.3 11H20v2h-.3a1.7 1.7 0 0 0-1.7 2z" />
-                                </svg>
+                                    <svg
+                                        width="32"
+                                        height="32"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.8"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <circle cx="12" cy="12" r="3" />
+                                        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.41 1.41-.06-.06A1.7 1.7 0 0 0 16.45 18a1.7 1.7 0 0 0-1.45 1.7V20h-2v-.3A1.7 1.7 0 0 0 11.55 18a1.7 1.7 0 0 0-1.88.34l-.06.06-1.41-1.41.06-.06A1.7 1.7 0 0 0 8 15.05a1.7 1.7 0 0 0-1.7-1.45H6v-2h.3A1.7 1.7 0 0 0 8 10.15a1.7 1.7 0 0 0-.34-1.88L7.6 8.21l1.41-1.41.06.06A1.7 1.7 0 0 0 10.95 7a1.7 1.7 0 0 0 1.45-1.7V5h2v.3A1.7 1.7 0 0 0 15.85 7a1.7 1.7 0 0 0 1.88-.34l.06-.06 1.41 1.41-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.3 11H20v2h-.3a1.7 1.7 0 0 0-1.7 2z" />
+                                    </svg>
+                                </div>
+
+                                <h3 className="mt-7 text-2xl font-extrabold tracking-tight text-slate-950">
+                                    Build
+                                </h3>
+
+                                <p className="mt-3 max-w-[220px] text-base leading-7 text-slate-500">
+                                    Build skills through hands-on projects and real experiences.
+                                </p>
+
+                                <div className="absolute bottom-7 left-6 h-1.5 w-10 rounded-full bg-slate-950 transition-all duration-300 group-hover:w-16" />
+
                             </div>
 
-                            <h3 className="mt-7 text-2xl font-extrabold tracking-tight text-slate-950">
-                                Build
-                            </h3>
-
-                            <p className="mt-3 max-w-[220px] text-base leading-7 text-slate-500">
-                                Build skills through hands-on projects and real experiences.
-                            </p>
-
-                            <div className="absolute bottom-7 left-6 h-1.5 w-10 rounded-full bg-slate-950 transition-all duration-300 group-hover:w-16" />
-
-                        </div>
-
-                        {/* =============================================
+                            {/* =============================================
                 INNOVATE
-            ============================================== */}
-                        <div
-                            className="
+            ============================================== * /}
+                            <div
+                                className="
                     group
                     relative
                     min-h-[285px]
@@ -887,16 +830,16 @@ function Home() {
                     hover:border-red-200
                     hover:shadow-[0_18px_45px_rgba(15,23,42,0.10)]
                 "
-                        >
+                            >
 
-                            {/* Number */}
-                            <span className="absolute right-6 top-6 text-xl font-bold text-slate-300">
-                                03
-                            </span>
+                                {/* Number * /}
+                                <span className="absolute right-6 top-6 text-xl font-bold text-slate-300">
+                                    03
+                                </span>
 
-                            {/* Icon */}
-                            <div
-                                className="
+                                {/* Icon * /}
+                                <div
+                                    className="
                         flex
                         h-16
                         w-16
@@ -909,47 +852,47 @@ function Home() {
                         duration-300
                         group-hover:scale-110
                     "
-                            >
-                                <svg
-                                    width="34"
-                                    height="34"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="1.8"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
                                 >
-                                    <path d="M4.5 16.5c-1.5-1.5-.5-4.5 1.5-6 2-1.5 4-2 6-2.5 1-2 2.5-3.5 4.5-4.5 1.5 2.5 1.5 5.5 0 8-1 1.5-2.5 3-4.5 3.5-1.5 1.5-4.5 3-6 1.5l-1.5 1.5z" />
-                                    <path d="M7 17l-2 2" />
-                                    <path d="M8.5 12.5l-3-1" />
-                                    <path d="M15.5 8.5l2 2" />
-                                    <circle cx="15.5" cy="7.5" r="1" />
-                                </svg>
+                                    <svg
+                                        width="34"
+                                        height="34"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="1.8"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M4.5 16.5c-1.5-1.5-.5-4.5 1.5-6 2-1.5 4-2 6-2.5 1-2 2.5-3.5 4.5-4.5 1.5 2.5 1.5 5.5 0 8-1 1.5-2.5 3-4.5 3.5-1.5 1.5-4.5 3-6 1.5l-1.5 1.5z" />
+                                        <path d="M7 17l-2 2" />
+                                        <path d="M8.5 12.5l-3-1" />
+                                        <path d="M15.5 8.5l2 2" />
+                                        <circle cx="15.5" cy="7.5" r="1" />
+                                    </svg>
+                                </div>
+
+                                <h3 className="mt-7 text-2xl font-extrabold tracking-tight text-slate-950">
+                                    Innovate
+                                </h3>
+
+                                <p className="mt-3 max-w-[220px] text-base leading-7 text-slate-500">
+                                    Turn concepts into innovations that shape tomorrow.
+                                </p>
+
+                                <div className="absolute bottom-7 left-6 h-1.5 w-10 rounded-full bg-red-500 transition-all duration-300 group-hover:w-16" />
+
                             </div>
-
-                            <h3 className="mt-7 text-2xl font-extrabold tracking-tight text-slate-950">
-                                Innovate
-                            </h3>
-
-                            <p className="mt-3 max-w-[220px] text-base leading-7 text-slate-500">
-                                Turn concepts into innovations that shape tomorrow.
-                            </p>
-
-                            <div className="absolute bottom-7 left-6 h-1.5 w-10 rounded-full bg-red-500 transition-all duration-300 group-hover:w-16" />
 
                         </div>
 
-                    </div>
-
-                    {/* =================================================
+                        {/* =================================================
             SCROLL INDICATOR
-        ================================================== */}
-                    <div className="mt-9 flex flex-col items-center">
+        ================================================== * /}
+                        <div className="mt-9 flex flex-col items-center">
 
-                        {/* Mouse */}
-                        <div
-                            className="
+                            {/* Mouse * /}
+                            <div
+                                className="
                     flex
                     h-12
                     w-7
@@ -960,37 +903,38 @@ function Home() {
                     border-red-500
                     p-1.5
                 "
-                        >
-                            <span className="h-2 w-1 rounded-full bg-red-500" />
+                            >
+                                <span className="h-2 w-1 rounded-full bg-red-500" />
+                            </div>
+
+                            <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.3em] text-slate-400 sm:text-xs">
+                                Scroll to explore
+                            </p>
+
+                            {/* Arrow * /}
+                            <svg
+                                className="mt-2 h-6 w-6 text-red-500"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            >
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+
                         </div>
-
-                        <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.3em] text-slate-400 sm:text-xs">
-                            Scroll to explore
-                        </p>
-
-                        {/* Arrow */}
-                        <svg
-                            className="mt-2 h-6 w-6 text-red-500"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <path d="M6 9l6 6 6-6" />
-                        </svg>
 
                     </div>
 
-                </div>
-
-                {/* =====================================================
+                    {/* =====================================================
         TRANSITION TO NEXT SECTION
-    ====================================================== */}
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-slate-50" />
+    ====================================================== * /}
+                    <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-slate-50" />
 
-            </section>
+                </section>
+            */}
 
             {/* =========================================================
     INNOVATION SECTION

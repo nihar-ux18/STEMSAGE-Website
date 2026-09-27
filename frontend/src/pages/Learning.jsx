@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Footer from "../components/common/Footer";
-import { featuredLearning, learningPaths, howWeTeach, learningExperience } from "../data/learning";
+import { featuredLearning, learningPaths, howWeTeach } from "../data/learning";
 
 const CATEGORY_ICON = {
   Robotics: "🤖", Electronics: "⚡", Programming: "💻",
