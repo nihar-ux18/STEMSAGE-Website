@@ -174,15 +174,21 @@ function Home() {
                     <div
                         className="
                             absolute
-                            bottom-[12%]
-                            left-1/2
+                            bottom-[15%]
+                            sm:bottom-[18%]
+                            md:bottom-[20%]
+                            lg:bottom-[22%]
+                            left-[4%]
+                            sm:left-[7%]
+                            md:left-[9%]
+                            lg:left-[11%]
                             z-20
                             flex
-                            -translate-x-1/2
                             flex-wrap
                             items-center
-                            justify-center
+                            justify-start
                             gap-3
+                            sm:gap-4
                         "
                     >
                         <Link
