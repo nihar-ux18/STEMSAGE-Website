@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import electronicsGif from "../../assets/innovations/electronics.gif";
 import roboticsGif from "../../assets/innovations/robotics.gif";
@@ -32,26 +31,26 @@ const innovationDoors = [
 
 function DoorsOfInnovation() {
     return (
-        <section className="relative overflow-hidden bg-white py-16 sm:py-24 px-5 border-b border-slate-100">
-            <div className="relative mx-auto max-w-6xl">
+        <section className="relative overflow-hidden bg-white py-20 sm:py-28 lg:py-36 px-6 sm:px-8 border-b border-slate-100">
+            <div className="relative mx-auto max-w-7xl">
                 {/* Heading */}
                 <div className="text-center">
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-extrabold text-slate-900 tracking-tight leading-tight">
                         5 Doors of <span className="text-red-600">Innovation</span>
                     </h2>
-                    {/* Small Red Line below heading */}
-                    <div className="mt-4 mx-auto h-[3px] w-16 bg-red-600 rounded-full" />
+                    {/* Red Line below heading */}
+                    <div className="mt-5 mx-auto h-[4px] w-20 sm:w-24 bg-red-600 rounded-full" />
                 </div>
 
                 {/* 5 Items Row */}
-                <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-6 items-start text-center">
+                <div className="mt-20 sm:mt-24 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-8 lg:gap-12 items-start text-center">
                     {innovationDoors.map((item, index) => (
                         <div
                             key={index}
-                            className="group flex flex-col items-center justify-start p-3 transition-all duration-300 hover:-translate-y-1.5"
+                            className="group flex flex-col items-center justify-start p-2 transition-all duration-300 hover:-translate-y-2 cursor-pointer"
                         >
                             {/* Animated GIF Container */}
-                            <div className="h-28 w-28 sm:h-32 sm:w-32 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                            <div className="h-36 w-36 sm:h-44 sm:w-44 lg:h-52 lg:w-52 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
                                 <img
                                     src={item.gif}
                                     alt={item.name}
@@ -60,7 +59,7 @@ function DoorsOfInnovation() {
                             </div>
 
                             {/* Title Label */}
-                            <span className="mt-6 text-base sm:text-lg font-bold text-slate-800 group-hover:text-red-600 transition-colors leading-snug max-w-[140px]">
+                            <span className="mt-8 text-lg sm:text-xl md:text-2xl font-bold text-slate-800 group-hover:text-red-600 transition-colors leading-snug max-w-[200px]">
                                 {item.name}
                             </span>
                         </div>
