@@ -31,8 +31,8 @@ const innovationDoors = [
 
 function DoorsOfInnovation() {
     return (
-        <section className="relative overflow-hidden bg-white py-20 sm:py-28 lg:py-36 px-6 sm:px-8 border-b border-slate-100">
-            <div className="relative mx-auto max-w-7xl">
+        <section className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white py-12 sm:py-16 px-6 sm:px-8 border-b border-slate-100">
+            <div className="relative mx-auto w-full max-w-7xl flex flex-col items-center justify-center">
                 {/* Heading */}
                 <div className="text-center">
                     <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[60px] font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -43,7 +43,7 @@ function DoorsOfInnovation() {
                 </div>
 
                 {/* 5 Items Row */}
-                <div className="mt-20 sm:mt-24 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-8 lg:gap-12 items-start text-center">
+                <div className="mt-16 sm:mt-20 md:mt-24 w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-8 lg:gap-12 items-start text-center">
                     {innovationDoors.map((item, index) => (
                         <div
                             key={index}

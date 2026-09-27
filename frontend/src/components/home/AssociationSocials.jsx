@@ -85,7 +85,7 @@ const socialPlatforms = [
 function AssociationSocials() {
     return (
         <section className="relative overflow-hidden bg-white py-16 sm:py-24 border-b border-slate-100">
-            {/* Inline Styles for Dual-Direction Marquee */}
+            {/* Inline Styles for Slow Dual-Direction Marquee without Hover Pause */}
             <style>{`
                 @keyframes marqueeLeftToRight {
                     0% { transform: translateX(-50%); }
@@ -98,16 +98,12 @@ function AssociationSocials() {
                 .animate-marquee-l2r {
                     display: flex;
                     width: max-content;
-                    animation: marqueeLeftToRight 28s linear infinite;
+                    animation: marqueeLeftToRight 55s linear infinite;
                 }
                 .animate-marquee-r2l {
                     display: flex;
                     width: max-content;
-                    animation: marqueeRightToLeft 28s linear infinite;
-                }
-                .animate-marquee-l2r:hover,
-                .animate-marquee-r2l:hover {
-                    animation-play-state: paused;
+                    animation: marqueeRightToLeft 55s linear infinite;
                 }
             `}</style>
 
@@ -121,7 +117,7 @@ function AssociationSocials() {
                     <div className="mt-4 mx-auto h-[3px] w-16 bg-red-600 rounded-full" />
                 </div>
 
-                {/* Marquee Section matching Reference Screenshot */}
+                {/* Marquee Section Container */}
                 <div className="mt-16 bg-slate-50/50 py-10 border-y border-slate-200/60 space-y-10 overflow-hidden">
                     {/* Row 1: Left to Right */}
                     <div className="relative w-full overflow-hidden">
