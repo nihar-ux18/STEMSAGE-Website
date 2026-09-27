@@ -1,5 +1,4 @@
 import React from "react";
-import { ArrowUpRight } from "lucide-react";
 
 import cpLogo from "../../assets/association_logos/CP.png";
 import droniLogo from "../../assets/association_logos/DroniCulture~mv2.webp";
@@ -21,71 +20,65 @@ const logosList = [
 const row1Items = [...logosList, ...logosList, ...logosList, ...logosList];
 const row2Items = [...logosList].reverse().concat([...logosList].reverse(), [...logosList].reverse(), [...logosList].reverse());
 
-// SVG Icons for Socials
-const InstagramIcon = (props) => (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+// Circular Brand SVG Icons matching reference screenshot
+const WhatsappCircleIcon = () => (
+    <svg viewBox="0 0 64 64" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-300 hover:scale-115 drop-shadow-md">
+        <circle cx="32" cy="32" r="30" fill="#25D366" />
+        <path fill="#FFFFFF" d="M32 14c-9.9 0-18 8.1-18 18 0 3.2.8 6.3 2.4 9L14 50l9.3-2.4c2.6 1.4 5.6 2.2 8.7 2.2 9.9 0 18-8.1 18-18S41.9 14 32 14zm10.4 25.5c-.4 1.2-2.3 2.4-3.2 2.5-.9.1-2 .5-6.7-1.4-5.7-2.3-9.4-8.1-9.7-8.5-.3-.4-2.4-3.2-2.4-6.1 0-2.9 1.5-4.3 2-4.9.5-.6 1.2-.7 1.6-.7.4 0 .8 0 1.2.1.4.1.9-.2 1.4 1 .5 1.2 1.7 4.2 1.9 4.5.1.3.2.7 0 1.1-.2.4-.3.7-.6 1-.3.3-.7.7-1 1-.3.3-.7.7-.3 1.4.4.7 1.8 3 3.9 4.9 2.7 2.4 5 3.1 5.7 3.5.7.4 1.1.3 1.5-.1.4-.4 1.7-2 2.1-2.7.4-.7.9-.6 1.5-.3.6.3 3.8 1.8 4.4 2.1.6.3 1 .5 1.2.8.2.4.2 1.9-.2 3.1z" />
     </svg>
 );
 
-const YoutubeIcon = (props) => (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
-        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" />
+const YoutubeCircleIcon = () => (
+    <svg viewBox="0 0 64 64" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-300 hover:scale-115 drop-shadow-md">
+        <circle cx="32" cy="32" r="30" fill="#FF0000" />
+        <path fill="#FFFFFF" d="M26 21v22l18-11L26 21z" />
     </svg>
 );
 
-const LinkedinIcon = (props) => (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
+const InstagramCircleIcon = () => (
+    <svg viewBox="0 0 64 64" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-300 hover:scale-115 drop-shadow-md">
+        <defs>
+            <linearGradient id="igCircleGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fdf497" />
+                <stop offset="25%" stopColor="#fdf497" />
+                <stop offset="45%" stopColor="#fd5949" />
+                <stop offset="60%" stopColor="#d6249f" />
+                <stop offset="90%" stopColor="#285AEB" />
+            </linearGradient>
+        </defs>
+        <circle cx="32" cy="32" r="30" fill="url(#igCircleGrad)" />
+        <rect x="18" y="18" width="28" height="28" rx="8" fill="none" stroke="#FFFFFF" strokeWidth="3" />
+        <circle cx="32" cy="32" r="7" fill="none" stroke="#FFFFFF" strokeWidth="3" />
+        <circle cx="39.5" cy="24.5" r="2" fill="#FFFFFF" />
     </svg>
 );
 
-const WhatsappIcon = (props) => (
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+const LinkedinCircleIcon = () => (
+    <svg viewBox="0 0 64 64" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-300 hover:scale-115 drop-shadow-md">
+        <circle cx="32" cy="32" r="30" fill="#0A66C2" />
+        <path fill="#FFFFFF" d="M20 27h6v17h-6V27zm3-9a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm7 9h5.6v2.4h.1c.8-1.5 2.7-3.1 5.6-3.1 6 0 7.1 3.9 7.1 9V44h-6v-8.7c0-2.1 0-4.8-2.9-4.8-2.9 0-3.4 2.3-3.4 4.6V44h-6V27z" />
     </svg>
 );
 
-const socialPlatforms = [
-    {
-        name: "Instagram",
-        icon: InstagramIcon,
-        handle: "@stemsage_official",
-        link: "#",
-        color: "hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white hover:border-transparent",
-    },
-    {
-        name: "YouTube",
-        icon: YoutubeIcon,
-        handle: "STEMSAGE Learning",
-        link: "#",
-        color: "hover:bg-red-600 hover:text-white hover:border-transparent",
-    },
-    {
-        name: "LinkedIn",
-        icon: LinkedinIcon,
-        handle: "STEMSAGE Education",
-        link: "#",
-        color: "hover:bg-blue-600 hover:text-white hover:border-transparent",
-    },
-    {
-        name: "WhatsApp",
-        icon: WhatsappIcon,
-        handle: "STEM Community",
-        link: "#",
-        color: "hover:bg-emerald-600 hover:text-white hover:border-transparent",
-    },
+const FacebookCircleIcon = () => (
+    <svg viewBox="0 0 64 64" className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-300 hover:scale-115 drop-shadow-md">
+        <circle cx="32" cy="32" r="30" fill="#1877F2" />
+        <path fill="#FFFFFF" d="M37 22h-4c-2.8 0-3.5 1.3-3.5 3.5V29h7.5l-1 7h-6.5v18h-8V36h-6v-7h6v-5.2C25 17.8 28.6 15 34.5 15c2.8 0 5.2.2 5.9.3v6.7z" />
+    </svg>
+);
+
+const socialCirclePlatforms = [
+    { name: "WhatsApp", icon: WhatsappCircleIcon, link: "#" },
+    { name: "YouTube", icon: YoutubeCircleIcon, link: "#" },
+    { name: "Instagram", icon: InstagramCircleIcon, link: "#" },
+    { name: "LinkedIn", icon: LinkedinCircleIcon, link: "#" },
+    { name: "Facebook", icon: FacebookCircleIcon, link: "#" },
 ];
 
 function AssociationSocials() {
     return (
         <section className="relative overflow-hidden bg-white py-16 sm:py-24 border-b border-slate-100">
-            {/* Inline Styles for Slow Dual-Direction Marquee without Hover Pause */}
+            {/* Inline Styles for Slow Dual-Direction Marquee */}
             <style>{`
                 @keyframes marqueeLeftToRight {
                     0% { transform: translateX(-50%); }
@@ -168,28 +161,22 @@ function AssociationSocials() {
                     <div className="mt-4 mx-auto h-[3px] w-16 bg-red-600 rounded-full" />
                 </div>
 
-                {/* Social Buttons Container */}
-                <div className="mt-12 max-w-5xl mx-auto px-5">
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        {socialPlatforms.map((platform) => {
-                            const Icon = platform.icon;
+                {/* Circular Social Icons Bar matching reference screenshot */}
+                <div className="mt-14 py-10 px-5 border-y border-slate-200/80 shadow-xs bg-white">
+                    <div className="flex items-center justify-center gap-6 sm:gap-10 md:gap-16 lg:gap-20 max-w-5xl mx-auto">
+                        {socialCirclePlatforms.map((platform) => {
+                            const IconComponent = platform.icon;
                             return (
                                 <a
                                     key={platform.name}
                                     href={platform.link}
+                                    aria-label={platform.name}
                                     onClick={(e) => {
                                         if (platform.link === "#") e.preventDefault();
                                     }}
-                                    className={`group flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-all duration-300 ${platform.color} shadow-xs`}
+                                    className="inline-flex items-center justify-center transition-transform hover:scale-110 focus:outline-none"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <Icon className="h-6 w-6 shrink-0" />
-                                        <div>
-                                            <div className="text-sm font-extrabold">{platform.name}</div>
-                                            <div className="text-xs opacity-75">{platform.handle}</div>
-                                        </div>
-                                    </div>
-                                    <ArrowUpRight className="h-5 w-5 opacity-50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                                    <IconComponent />
                                 </a>
                             );
                         })}
