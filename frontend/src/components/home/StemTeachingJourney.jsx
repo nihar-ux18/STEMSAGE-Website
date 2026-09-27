@@ -7,8 +7,35 @@ function StemTeachingJourney() {
         <section className="relative overflow-hidden bg-white px-5 py-16 sm:px-8 sm:py-24 md:px-10 lg:px-12 border-b border-slate-200/80">
             <div className="relative mx-auto max-w-7xl">
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-                    {/* Left Column: Content & CTA */}
-                    <div>
+                    {/* Left Column: Visual Graphic (Swapped to Left) */}
+                    <div className="relative mx-auto w-full max-w-lg lg:max-w-none order-2 lg:order-1">
+                        <div className="relative overflow-hidden rounded-3xl border-4 border-slate-100 bg-slate-900 shadow-2xl">
+                            <img
+                                src="/images/hero-1.png"
+                                alt="STEM Educator teaching students"
+                                className="h-full w-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+
+                            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-white/95 backdrop-blur-md p-5 text-slate-900 shadow-lg">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-600">
+                                        <Users className="h-6 w-6" />
+                                    </div>
+                                    <div>
+                                        <div className="text-sm font-extrabold text-slate-900">Educator Network</div>
+                                        <div className="text-xs text-slate-500">Empowering Schools & Mentors</div>
+                                    </div>
+                                </div>
+                                <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">
+                                    Join Network
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Content & CTA (Swapped to Right) */}
+                    <div className="order-1 lg:order-2">
                         <div className="mb-4 flex items-center gap-3">
                             <span className="h-[2px] w-8 bg-red-600 sm:w-12" />
                             <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-red-600 sm:text-xs">
@@ -67,33 +94,6 @@ function StemTeachingJourney() {
                                 <span>Explore Programs</span>
                                 <ArrowRight className="h-4 w-4" />
                             </Link>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Visual Graphic */}
-                    <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                        <div className="relative overflow-hidden rounded-3xl border-4 border-slate-100 bg-slate-900 shadow-2xl">
-                            <img
-                                src="/images/hero-1.png"
-                                alt="STEM Educator teaching students"
-                                className="h-full w-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-
-                            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-2xl bg-white/95 backdrop-blur-md p-5 text-slate-900 shadow-lg">
-                                <div className="flex items-center gap-3">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-600">
-                                        <Users className="h-6 w-6" />
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-extrabold text-slate-900">Educator Network</div>
-                                        <div className="text-xs text-slate-500">Empowering Schools & Mentors</div>
-                                    </div>
-                                </div>
-                                <span className="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">
-                                    Join Network
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>

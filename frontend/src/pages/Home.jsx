@@ -6,7 +6,6 @@ import Footer from "../components/common/Footer";
 import DoorsOfInnovation from "../components/home/DoorsOfInnovation";
 import WhatWeProvide from "../components/home/WhatWeProvide";
 import StemsageImpact from "../components/home/StemsageImpact";
-import ExploreStem from "../components/home/ExploreStem";
 import BookDemoWorkshop from "../components/home/BookDemoWorkshop";
 import StemTeachingJourney from "../components/home/StemTeachingJourney";
 import AssociationSocials from "../components/home/AssociationSocials";
@@ -336,27 +335,22 @@ function Home() {
             <StemsageImpact />
 
             {/* =========================================================
-                SECTION 4 — EXPLORE STEM
-            ========================================================== */}
-            <ExploreStem />
-
-            {/* =========================================================
-                SECTION 5 — BOOK A DEMO WORKSHOP
+                SECTION 4 — BOOK A DEMO WORKSHOP NOW
             ========================================================== */}
             <BookDemoWorkshop />
 
             {/* =========================================================
-                SECTION 6 — STEM TEACHING JOURNEY
+                SECTION 5 — STEM TEACHING JOURNEY
             ========================================================== */}
             <StemTeachingJourney />
 
             {/* =========================================================
-                SECTION 7 — ASSOCIATION / SOCIALS
+                SECTION 6 — ASSOCIATION / SOCIALS
             ========================================================== */}
             <AssociationSocials />
 
             {/* =========================================================
-                SECTION 8 — TESTIMONIAL
+                SECTION 7 — TESTIMONIAL
             ========================================================== */}
             <TestimonialsSection />
 
