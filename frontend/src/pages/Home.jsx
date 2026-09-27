@@ -178,10 +178,10 @@ function Home() {
                             sm:bottom-[18%]
                             md:bottom-[20%]
                             lg:bottom-[22%]
-                            left-[4%]
+                            left-[1%]
                             sm:left-[7%]
                             md:left-[9%]
-                            lg:left-[11%]
+                            lg:left-[7%]
                             z-20
                             flex
                             flex-wrap
