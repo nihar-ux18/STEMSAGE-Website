@@ -1,88 +1,124 @@
-import React from "react";
-import { Quote, Star } from "lucide-react";
-import SectionHeading from "./SectionHeading";
+import React, { useState, useEffect } from "react";
 
 const testimonials = [
     {
         id: "test-1",
-        quote: "The workshops by STEMSAGE not only inspired our students but also provided them with the technical foundation to explore technology and innovation.",
+        quote: "The workshops by STEMSAGE not only inspired our students but also provided them with the technical foundation to excel at the national level. The success of Vhyuastra Robotics is a testament to their innovative approach to education.",
         name: "Dr. Sharma",
         role: "Principal, SVKM School",
-        rating: 5,
-        badge: "Institutional Partner",
+        avatar: "/images/hero-2.png",
     },
     {
         id: "test-2",
-        quote: "STEMSAGE has been instrumental in bridging the gap between academic theory and practical engineering applications through high quality hardware kits.",
+        quote: "STEMSAGE has been instrumental in bridging the gap between academic theory and practical engineering applications through high quality hardware kits and interactive robotics labs.",
         name: "Prof. Patel",
         role: "Head of Engineering, RCPIT",
-        rating: 5,
-        badge: "Faculty Educator",
+        avatar: "/images/hero-3.png",
     },
     {
         id: "test-3",
-        quote: "My daughter built her first autonomous robotics project after attending the 3-day STEMSAGE workshop. The mentors are genuinely passionate and supportive!",
+        quote: "My daughter built her first autonomous robotics project after attending the 3-day STEMSAGE workshop. The mentors are genuinely passionate, supportive, and knowledgeable!",
         name: "Ms. Reddy",
         role: "Parent of High School Student",
-        rating: 5,
-        badge: "Parent Feedback",
+        avatar: "/images/hero-1.png",
+    },
+    {
+        id: "test-4",
+        quote: "The hands-on learning kits provided by STEMSAGE turned our science classroom into an active innovation lab. Students learn circuit design and programming with real enthusiasm.",
+        name: "Anand Verma",
+        role: "STEM Coordinator, Apex International",
+        avatar: "/images/hero-2.png",
+    },
+    {
+        id: "test-5",
+        quote: "Organizing the IoT & Robotics bootcamp with STEMSAGE was seamless. The students built working smart sensors in just two days. Truly an extraordinary experience!",
+        name: "Sneha Kulkarni",
+        role: "Head of Innovation Lab, Tech Campus",
+        avatar: "/images/hero-3.png",
     },
 ];
 
-export function TestimonialCard({ item }) {
-    return (
-        <div className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-red-300 hover:shadow-xl hover:shadow-red-500/10">
-            {/* Top quote icon & rating stars */}
-            <div>
-                <div className="flex items-center justify-between">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
-                        <Quote className="h-5 w-5" />
-                    </div>
-                    <div className="flex items-center gap-1 text-amber-400">
-                        {[...Array(item.rating)].map((_, i) => (
-                            <Star key={i} className="h-4 w-4 fill-current" />
-                        ))}
-                    </div>
-                </div>
-
-                {/* Quote Text */}
-                <p className="mt-6 text-base leading-relaxed text-slate-700 italic">
-                    "{item.quote}"
-                </p>
-            </div>
-
-            {/* Author details */}
-            <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-                <div>
-                    <h4 className="text-base font-bold text-slate-900 group-hover:text-red-600 transition-colors">
-                        {item.name}
-                    </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                        {item.role}
-                    </p>
-                </div>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold text-slate-600">
-                    {item.badge}
-                </span>
-            </div>
-        </div>
-    );
-}
-
 function TestimonialsSection() {
-    return (
-        <section className="relative overflow-hidden bg-white px-5 py-16 sm:px-8 sm:py-24 md:px-10 lg:px-12 border-b border-slate-200/80">
-            <div className="relative mx-auto max-w-7xl">
-                <SectionHeading
-                    eyebrow="Testimonial"
-                    title="What Educators & Parents"
-                    highlightTitle="Say About Us"
-                    description="Feedback from school leaders, engineering professors, and parents who have experienced STEMSAGE programs."
-                />
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-                <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-                    {testimonials.map((item) => (
-                        <TestimonialCard key={item.id} item={item} />
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+    };
+
+    // Auto-advance carousel every 6 seconds
+    useEffect(() => {
+        const timer = setInterval(() => {
+            nextSlide();
+        }, 6000);
+        return () => clearInterval(timer);
+    }, [currentIndex]);
+
+    const current = testimonials[currentIndex];
+
+    return (
+        <section className="relative w-full overflow-hidden bg-gradient-to-r from-sky-100 via-teal-50 to-blue-100 py-16 sm:py-20 lg:py-24 border-b border-slate-200/60">
+            {/* Left Navigation Arrow — Distant at the outer left side of the screen */}
+            <button
+                type="button"
+                onClick={prevSlide}
+                aria-label="Previous testimonial"
+                className="absolute left-4 sm:left-8 md:left-12 lg:left-16 xl:left-24 top-1/2 -translate-y-1/2 z-30 flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center text-4xl sm:text-5xl lg:text-6xl font-light text-slate-500 hover:text-slate-900 transition-all hover:scale-125 focus:outline-none"
+            >
+                ‹
+            </button>
+
+            {/* Right Navigation Arrow — Distant at the outer right side of the screen */}
+            <button
+                type="button"
+                onClick={nextSlide}
+                aria-label="Next testimonial"
+                className="absolute right-4 sm:right-8 md:right-12 lg:right-16 xl:right-24 top-1/2 -translate-y-1/2 z-30 flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center text-4xl sm:text-5xl lg:text-6xl font-light text-slate-500 hover:text-slate-900 transition-all hover:scale-125 focus:outline-none"
+            >
+                ›
+            </button>
+
+            {/* Center Content Area */}
+            <div className="relative mx-auto max-w-4xl px-6 sm:px-10">
+                {/* White Card */}
+                <div className="relative w-full bg-white rounded-3xl p-8 sm:p-12 lg:p-14 shadow-2xl border border-white/80 transition-all duration-500 min-h-[300px] flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                    {/* Left Avatar */}
+                    <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full overflow-hidden shrink-0 border-4 border-slate-100 shadow-xl bg-slate-200">
+                        <img
+                            src={current.avatar}
+                            alt={current.name}
+                            className="w-full h-full object-cover transition-opacity duration-300"
+                        />
+                    </div>
+
+                    {/* Right Content */}
+                    <div className="flex-1 text-center md:text-left">
+                        <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed sm:leading-loose">
+                            "{current.quote}"
+                        </p>
+                        <p className="mt-6 text-sm sm:text-base font-semibold text-slate-600">
+                            — {current.role}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Pagination Dots */}
+                <div className="mt-8 flex items-center justify-center gap-2.5">
+                    {testimonials.map((_, idx) => (
+                        <button
+                            key={idx}
+                            type="button"
+                            onClick={() => setCurrentIndex(idx)}
+                            aria-label={`Go to slide ${idx + 1}`}
+                            className={`h-2.5 rounded-full transition-all duration-300 ${
+                                idx === currentIndex
+                                    ? "w-8 bg-slate-700"
+                                    : "w-2.5 bg-slate-400/60 hover:bg-slate-600"
+                            }`}
+                        />
                     ))}
                 </div>
             </div>
