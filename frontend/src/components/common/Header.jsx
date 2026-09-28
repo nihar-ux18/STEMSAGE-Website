@@ -75,8 +75,59 @@ const navItems = [
   { label: "Contact", path: "/contact" },
 ];
 
+/* ─── Coming Soon Modal ─── */
+function ComingSoonModal({ title, onClose }) {
+  if (!title) return null;
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl text-center">
+        <button
+          onClick={onClose}
+          type="button"
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition"
+        >
+          <X size={18} />
+        </button>
+
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 text-red-600 text-3xl shadow-inner">
+          🚀
+        </div>
+
+        <span className="inline-block px-3 py-1 rounded-full bg-red-100 text-red-600 text-[11px] font-bold uppercase tracking-wider mb-3">
+          Coming Soon
+        </span>
+
+        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-2">
+          {title}
+        </h3>
+
+        <p className="text-sm text-slate-600 leading-relaxed mb-6">
+          This course is currently under development. Stay tuned for upcoming schedule releases and enrollment details!
+        </p>
+
+        <div className="flex flex-col gap-2.5">
+          <Link
+            to="/courses"
+            onClick={onClose}
+            className="w-full py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition shadow-md"
+          >
+            Browse Course Catalog
+          </Link>
+          <button
+            onClick={onClose}
+            type="button"
+            className="w-full py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider transition"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Desktop Mega Menu for Courses ─── */
-function CoursesMegaMenu() {
+function CoursesMegaMenu({ onCourseClick }) {
   return (
     <div
       style={{
@@ -132,8 +183,9 @@ function CoursesMegaMenu() {
                       {cat.items.map((item) => (
                         <li key={item.label}>
                           <Link
-                            to={item.path}
-                            className="text-[13px] font-normal text-slate-700 hover:text-blue-600 transition-colors block py-0.5"
+                            to={`/courses?course=${encodeURIComponent(item.label)}`}
+                            onClick={() => onCourseClick(item.label)}
+                            className="text-[13px] font-normal text-slate-700 hover:text-blue-600 transition-colors block py-0.5 text-left w-full cursor-pointer"
                           >
                             {item.label}
                           </Link>
@@ -216,6 +268,7 @@ function DropdownMenu({ items }) {
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [comingSoonTitle, setComingSoonTitle] = useState(null);
   const location = useLocation();
   const dropdownRef = useRef(null);
 
@@ -256,240 +309,96 @@ function Header() {
     return false;
   };
 
+  const handleCourseItemClick = (courseTitle) => {
+    setOpenDropdown(null);
+    setIsMobileMenuOpen(false);
+    setComingSoonTitle(courseTitle);
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
-        {/* Brand */}
-        <div className="flex items-center gap-3">
-          <Link
-            to="/"
-            className="flex items-center gap-2.5 text-slate-900 transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded"
-          >
-            <img
-              src="/images/logo.png"
-              alt="STEMSAGE"
-              className="h-8 w-auto object-contain"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
-            />
-            <span className="text-lg font-extrabold leading-none tracking-tight text-slate-900">
-              STEMSAGE
-            </span>
-          </Link>
-        </div>
+          {/* Brand */}
+          <div className="flex items-center gap-3">
+            <Link
+              to="/"
+              className="flex items-center gap-2.5 text-slate-900 transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 rounded"
+            >
+              <img
+                src="/images/logo.png"
+                alt="STEMSAGE"
+                className="h-8 w-auto object-contain"
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+              />
+              <span className="text-lg font-extrabold leading-none tracking-tight text-slate-900">
+                STEMSAGE
+              </span>
+            </Link>
+          </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Main Navigation" ref={dropdownRef}>
-          {navItems.map((item) => {
-            const active = isGroupActive(item);
-
-            /* ── Item with Courses Mega Menu ── */
-            if (item.isMegaMenu) {
-              const isOpen = openDropdown === item.label;
-              return (
-                <div
-                  key={item.label}
-                  style={{ position: "relative" }}
-                  onMouseEnter={() => setOpenDropdown(item.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <Link
-                    to={item.path}
-                    className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
-                      active
-                        ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
-                        : "font-medium text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    {item.label}
-                    <ChevronDown
-                      size={14}
-                      className="text-slate-400 transition-transform duration-200"
-                      style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                    />
-                  </Link>
-                  {isOpen && <CoursesMegaMenu />}
-                </div>
-              );
-            }
-
-            /* ── Standard Dropdown ── */
-            if (item.dropdown) {
-              const isOpen = openDropdown === item.label;
-              return (
-                <div
-                  key={item.label}
-                  style={{ position: "relative" }}
-                  onMouseEnter={() => setOpenDropdown(item.label)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <Link
-                    to={item.path}
-                    className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
-                      active
-                        ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
-                        : "font-medium text-slate-600 hover:text-slate-900"
-                    }`}
-                  >
-                    {item.label}
-                    <ChevronDown
-                      size={14}
-                      className="text-slate-400 transition-transform duration-200"
-                      style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                    />
-                  </Link>
-                  {isOpen && <DropdownMenu items={item.dropdown} />}
-                </div>
-              );
-            }
-
-            /* ── Regular link ── */
-            return (
-              <Link
-                key={item.label}
-                to={item.path}
-                className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
-                  active
-                    ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
-                    : "font-medium text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Desktop Right Actions */}
-        <div className="hidden items-center gap-3.5 lg:flex">
-          <Link
-            to="/services"
-            className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 shadow-sm"
-          >
-            GET STARTED
-          </Link>
-        </div>
-
-        {/* Mobile Menu Toggle */}
-        <div className="flex items-center gap-2 lg:hidden">
-          <button
-            type="button"
-            aria-expanded={isMobileMenuOpen}
-            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
-          >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation Drawer */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col justify-between border-t border-slate-200 bg-white px-6 py-6 lg:hidden overflow-y-auto shadow-2xl">
-          <div className="space-y-1">
+          {/* Desktop Nav */}
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Main Navigation" ref={dropdownRef}>
             {navItems.map((item) => {
               const active = isGroupActive(item);
 
-              /* ── Mega Menu (Courses) Mobile ── */
+              /* ── Item with Courses Mega Menu ── */
               if (item.isMegaMenu) {
                 const isOpen = openDropdown === item.label;
                 return (
-                  <div key={item.label}>
-                    <div
-                      className={`flex h-11 items-center justify-between rounded-lg px-3 cursor-pointer transition-colors ${
+                  <div
+                    key={item.label}
+                    style={{ position: "relative" }}
+                    onMouseEnter={() => setOpenDropdown(item.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <Link
+                      to={item.path}
+                      className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
                         active
-                          ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
-                          : "font-medium text-slate-700 hover:bg-slate-50"
+                          ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
+                          : "font-medium text-slate-600 hover:text-slate-900"
                       }`}
-                      onClick={() => setOpenDropdown(isOpen ? null : item.label)}
                     >
-                      <span className="text-base">{item.label}</span>
+                      {item.label}
                       <ChevronDown
-                        size={16}
+                        size={14}
                         className="text-slate-400 transition-transform duration-200"
                         style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                       />
-                    </div>
-
-                    {isOpen && (
-                      <div className="ml-4 mt-2 border-l-2 border-slate-100 pl-3 space-y-4 py-2">
-                        {coursesMegaMenuColumns.map((col) =>
-                          col.categories.map((cat) => (
-                            <div key={cat.title} className="space-y-1">
-                              <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600">
-                                <span>❖</span>
-                                <span>{cat.title}</span>
-                              </div>
-                              {cat.items.map((child) => (
-                                <Link
-                                  key={child.label}
-                                  to={child.path}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="block pl-3 text-xs text-slate-600 hover:text-blue-600 py-1"
-                                >
-                                  {child.label}
-                                </Link>
-                              ))}
-                            </div>
-                          ))
-                        )}
-                      </div>
-                    )}
+                    </Link>
+                    {isOpen && <CoursesMegaMenu onCourseClick={handleCourseItemClick} />}
                   </div>
                 );
               }
 
-              /* ── Standard Dropdown Mobile ── */
+              /* ── Standard Dropdown ── */
               if (item.dropdown) {
                 const isOpen = openDropdown === item.label;
                 return (
-                  <div key={item.label}>
-                    <div
-                      className={`flex h-11 items-center justify-between rounded-lg px-3 cursor-pointer transition-colors ${
+                  <div
+                    key={item.label}
+                    style={{ position: "relative" }}
+                    onMouseEnter={() => setOpenDropdown(item.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <Link
+                      to={item.path}
+                      className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
                         active
-                          ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
-                          : "font-medium text-slate-700 hover:bg-slate-50"
+                          ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
+                          : "font-medium text-slate-600 hover:text-slate-900"
                       }`}
-                      onClick={() => setOpenDropdown(isOpen ? null : item.label)}
                     >
-                      <span className="text-base">{item.label}</span>
+                      {item.label}
                       <ChevronDown
-                        size={16}
+                        size={14}
                         className="text-slate-400 transition-transform duration-200"
                         style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
                       />
-                    </div>
-                    {isOpen && (
-                      <div className="ml-4 mt-1 border-l-2 border-slate-100 pl-3 space-y-0.5">
-                        {item.dropdown.map((child) =>
-                          child.disabled ? (
-                            <div
-                              key={child.label}
-                              className="flex h-10 items-center gap-2 px-3 text-sm text-slate-400 cursor-not-allowed"
-                            >
-                              <span>{child.icon}</span>
-                              <span>{child.label}</span>
-                              <span className="ml-auto text-[9px] font-bold uppercase tracking-wider bg-slate-100 text-slate-400 px-1.5 py-0.5 rounded-full">Soon</span>
-                            </div>
-                          ) : (
-                            <Link
-                              key={child.label}
-                              to={child.path}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              className={`flex h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors ${
-                                isActiveRoute(child.path)
-                                  ? "font-bold text-red-600 bg-red-50/60"
-                                  : "font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                              }`}
-                            >
-                              <span>{child.icon}</span>
-                              <span>{child.label}</span>
-                            </Link>
-                          )
-                        )}
-                      </div>
-                    )}
+                    </Link>
+                    {isOpen && <DropdownMenu items={item.dropdown} />}
                   </div>
                 );
               }
@@ -499,33 +408,193 @@ function Header() {
                 <Link
                   key={item.label}
                   to={item.path}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`flex h-11 items-center justify-between rounded-lg px-3 text-base transition-colors ${
+                  className={`inline-flex items-center gap-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 rounded px-1 ${
                     active
-                      ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
-                      : "font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                      ? "font-bold text-red-600 underline decoration-red-500 decoration-2 underline-offset-4"
+                      : "font-medium text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  <span>{item.label}</span>
+                  {item.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
-          <div className="pt-6 border-t border-slate-100">
+          {/* Desktop Right Actions */}
+          <div className="hidden items-center gap-3.5 lg:flex">
             <Link
               to="/services"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex h-11 w-full items-center justify-center rounded-md bg-red-600 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-red-700"
+              className="inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 shadow-sm"
             >
               GET STARTED
             </Link>
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              type="button"
+              aria-expanded={isMobileMenuOpen}
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Navigation Drawer */}
+        {isMobileMenuOpen && (
+          <div className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col justify-between border-t border-slate-200 bg-white px-6 py-6 lg:hidden overflow-y-auto shadow-2xl">
+            <div className="space-y-1">
+              {navItems.map((item) => {
+                const active = isGroupActive(item);
+
+                /* ── Mega Menu (Courses) Mobile ── */
+                if (item.isMegaMenu) {
+                  const isOpen = openDropdown === item.label;
+                  return (
+                    <div key={item.label}>
+                      <div
+                        className={`flex h-11 items-center justify-between rounded-lg px-3 cursor-pointer transition-colors ${
+                          active
+                            ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
+                            : "font-medium text-slate-700 hover:bg-slate-50"
+                        }`}
+                        onClick={() => setOpenDropdown(isOpen ? null : item.label)}
+                      >
+                        <span className="text-base">{item.label}</span>
+                        <ChevronDown
+                          size={16}
+                          className="text-slate-400 transition-transform duration-200"
+                          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                        />
+                      </div>
+
+                      {isOpen && (
+                        <div className="ml-4 mt-2 border-l-2 border-slate-100 pl-3 space-y-4 py-2">
+                          {coursesMegaMenuColumns.map((col) =>
+                            col.categories.map((cat) => (
+                              <div key={cat.title} className="space-y-1">
+                                <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600">
+                                  <span>❖</span>
+                                  <span>{cat.title}</span>
+                                </div>
+                                {cat.items.map((child) => (
+                                  <Link
+                                    key={child.label}
+                                    to={`/courses?course=${encodeURIComponent(child.label)}`}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block pl-3 text-xs text-slate-600 hover:text-blue-600 py-1 text-left w-full"
+                                  >
+                                    {child.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                /* ── Standard Dropdown Mobile ── */
+                if (item.dropdown) {
+                  const isOpen = openDropdown === item.label;
+                  return (
+                    <div key={item.label}>
+                      <div
+                        className={`flex h-11 items-center justify-between rounded-lg px-3 cursor-pointer transition-colors ${
+                          active
+                            ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
+                            : "font-medium text-slate-700 hover:bg-slate-50"
+                        }`}
+                        onClick={() => setOpenDropdown(isOpen ? null : item.label)}
+                      >
+                        <span className="text-base">{item.label}</span>
+                        <ChevronDown
+                          size={16}
+                          className="text-slate-400 transition-transform duration-200"
+                          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                        />
+                      </div>
+                      {isOpen && (
+                        <div className="ml-4 mt-1 border-l-2 border-slate-100 pl-3 space-y-0.5">
+                          {item.dropdown.map((child) =>
+                            child.disabled ? (
+                              <div
+                                key={child.label}
+                                className="flex h-10 items-center gap-2 px-3 text-sm text-slate-400 cursor-not-allowed"
+                              >
+                                <span>{child.icon}</span>
+                                <span>{child.label}</span>
+                                <span className="ml-auto text-[9px] font-bold uppercase tracking-wider bg-slate-100 text-slate-400 px-1.5 py-0.5 rounded-full">Soon</span>
+                              </div>
+                            ) : (
+                              <Link
+                                key={child.label}
+                                to={child.path}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={`flex h-10 items-center gap-2 rounded-lg px-3 text-sm transition-colors ${
+                                  isActiveRoute(child.path)
+                                    ? "font-bold text-red-600 bg-red-50/60"
+                                    : "font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                                }`}
+                              >
+                                <span>{child.icon}</span>
+                                <span>{child.label}</span>
+                              </Link>
+                            )
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                /* ── Regular link ── */
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex h-11 items-center justify-between rounded-lg px-3 text-base transition-colors ${
+                      active
+                        ? "border-l-4 border-red-500 bg-red-50/60 font-bold text-red-600 pl-4"
+                        : "font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="pt-6 border-t border-slate-100">
+              <Link
+                to="/services"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex h-11 w-full items-center justify-center rounded-md bg-red-600 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-red-700"
+              >
+                GET STARTED
+              </Link>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Coming Soon Modal */}
+      <ComingSoonModal
+        title={comingSoonTitle}
+        onClose={() => setComingSoonTitle(null)}
+      />
+    </>
   );
 }
 
 export default Header;
+
+
 

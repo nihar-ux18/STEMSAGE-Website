@@ -1,402 +1,147 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams, Link } from "react-router-dom";
+import { X } from "lucide-react";
 import Footer from "../components/common/Footer";
-import PageHero from "../components/mock/PageHero";
-import FilterBar from "../components/mock/FilterBar";
-import MockModal from "../components/mock/MockModal";
-import StatusBadge from "../components/mock/StatusBadge";
-import { courses, courseCategories } from "../data/courses";
 
-const levelColor = { Beginner: "#16a34a", Intermediate: "#d97706", Advanced: "#dc2626" };
-const modeColor = { Online: "#2563eb", Offline: "#7c3aed", Hybrid: "#0891b2" };
+import bannerBg from "../assets/services/Courses.png";
+import eduKitBg from "../assets/Edu-kit.webp";
 
-const ICON_MAP = {
-  Robotics: "🤖",
-  Electronics: "⚡",
-  Programming: "💻",
-  IoT: "📡",
-  "3D Design": "🖨️",
-  "AI/ML": "🧠",
-};
+const courseTracks = [
+  {
+    id: "electronics",
+    title: "Electronics",
+    text: "Learn circuit design, microcontrollers, components, digital electronics, and practical troubleshooting with step-by-step hands-on guides.",
+    items: ["Basic electronics", "Fundamentals of Electronics", "Digital Electronics"],
+  },
+  {
+    id: "iot",
+    title: "Internet of Things",
+    text: "Connect physical microcontrollers and sensors to the web. Master Arduino programming, Wi-Fi modules, cloud dashboards, and automation.",
+    items: [
+      "Arduino Masterclass",
+      "Play with Sensors",
+      "IOT Masterclass",
+      "Industrial IOT Training & Workshops",
+    ],
+  },
+  {
+    id: "robotics",
+    title: "Robotics",
+    text: "Build and program autonomous mobile robots, obstacle avoiders, line followers, and explore physics simulation robotics.",
+    items: ["DIY Robotics", "Advanced Robotics Masterclass", "SRC (Simulation Robotics Class)"],
+  },
+  {
+    id: "3d-design",
+    title: "3D Designing & Animations",
+    text: "Go from concept sketch to finished 3D printed prototype. Master CAD modeling, enclosure design, slicing, and 3D animations.",
+    items: ["3D Designing Masterclass", "3D Animation Super Course"],
+  },
+];
 
-function CourseCard({ course, onView }) {
+/* ─── Coming Soon Modal ─── */
+function CourseComingSoonModal({ title, onClose }) {
+  if (!title) return null;
   return (
-    <div
-      style={{
-        background: "white",
-        borderRadius: "14px",
-        border: "1px solid #e2e8f0",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-        transition: "box-shadow 0.2s, transform 0.2s",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)";
-        e.currentTarget.style.transform = "translateY(-2px)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)";
-        e.currentTarget.style.transform = "translateY(0)";
-      }}
-    >
-      {/* Visual */}
-      <div
-        style={{
-          background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-          height: "140px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "52px",
-          position: "relative",
-        }}
-      >
-        {ICON_MAP[course.category] || "📚"}
-        <span
-          style={{
-            position: "absolute",
-            top: "12px",
-            left: "12px",
-            background: "#e11d48",
-            color: "white",
-            fontSize: "10px",
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            padding: "3px 10px",
-            borderRadius: "9999px",
-          }}
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="relative w-full max-w-md overflow-hidden bg-white p-6 sm:p-8 shadow-2xl text-center border border-slate-200">
+        <button
+          onClick={onClose}
+          type="button"
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition"
         >
-          {course.category}
-        </span>
-      </div>
+          <X size={18} />
+        </button>
 
-      {/* Content */}
-      <div style={{ padding: "20px", flex: 1, display: "flex", flexDirection: "column", gap: "10px" }}>
-        <h3
-          style={{
-            margin: 0,
-            fontSize: "16px",
-            fontWeight: 800,
-            color: "#0f172a",
-            lineHeight: 1.25,
-          }}
-        >
-          {course.title}
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50 text-red-600 text-3xl">
+          🚀
+        </div>
+
+        <span className="inline-block px-3 py-1 rounded-full bg-red-100 text-red-600 text-[11px] font-bold uppercase tracking-wider mb-3">
+          Coming Soon
+        </span>
+
+        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
+          {title}
         </h3>
-        <p style={{ margin: 0, fontSize: "13px", color: "#64748b", lineHeight: 1.6 }}>
-          {course.description}
+
+        <p className="text-sm text-slate-600 leading-relaxed mb-6">
+          This course is currently under development by our engineering team. Stay tuned for upcoming schedule releases and curriculum updates!
         </p>
 
-        {/* Meta */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "4px" }}>
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 700,
-              padding: "3px 8px",
-              borderRadius: "6px",
-              background: "#f0fdf4",
-              color: levelColor[course.level] || "#475569",
-              border: "1px solid #dcfce7",
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-            }}
-          >
-            {course.level}
-          </span>
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 700,
-              padding: "3px 8px",
-              borderRadius: "6px",
-              background: "#eff6ff",
-              color: modeColor[course.mode] || "#475569",
-              border: "1px solid #bfdbfe",
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-            }}
-          >
-            {course.mode}
-          </span>
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 700,
-              padding: "3px 8px",
-              borderRadius: "6px",
-              background: "#f8fafc",
-              color: "#475569",
-              border: "1px solid #e2e8f0",
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-            }}
-          >
-            ⏱ {course.duration}
-          </span>
-        </div>
-
-        {/* Tags */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-          {course.tags.map((t) => (
-            <span
-              key={t}
-              style={{
-                fontSize: "10px",
-                color: "#64748b",
-                background: "#f1f5f9",
-                padding: "2px 8px",
-                borderRadius: "4px",
-                border: "1px solid #e2e8f0",
-              }}
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Footer */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "auto",
-            paddingTop: "14px",
-            borderTop: "1px solid #f1f5f9",
-          }}
-        >
-          <span style={{ fontSize: "20px", fontWeight: 900, color: "#0f172a" }}>
-            ₹{course.price.toLocaleString("en-IN")}
-          </span>
+        <div className="flex flex-col gap-2.5">
           <button
-            onClick={() => onView(course)}
-            style={{
-              padding: "9px 20px",
-              background: "#0f172a",
-              color: "white",
-              border: "none",
-              borderRadius: "9999px",
-              fontWeight: 700,
-              fontSize: "11px",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              cursor: "pointer",
-              transition: "background 0.15s",
+            onClick={() => {
+              alert(`Thank you for your interest in "${title}"! We will notify you upon launch.`);
+              onClose();
             }}
-            onMouseEnter={(e) => (e.target.style.background = "#e11d48")}
-            onMouseLeave={(e) => (e.target.style.background = "#0f172a")}
+            type="button"
+            className="w-full py-3 px-4 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider transition shadow-md"
           >
-            View Course
+            Notify Me Upon Release
+          </button>
+          <button
+            onClick={onClose}
+            type="button"
+            className="w-full py-2.5 px-4 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs uppercase tracking-wider transition"
+          >
+            Close
           </button>
         </div>
       </div>
     </div>
-  );
-}
-
-function CourseDetailModal({ course, onClose }) {
-  if (!course) return null;
-  return (
-    <MockModal isOpen={!!course} onClose={onClose} title={course.title}>
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-          <StatusBadge status={course.level} />
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 700,
-              padding: "3px 10px",
-              borderRadius: "9999px",
-              background: "#f1f5f9",
-              color: "#475569",
-              border: "1px solid #e2e8f0",
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-            }}
-          >
-            {course.mode} • {course.duration}
-          </span>
-        </div>
-        <p style={{ margin: 0, color: "#475569", fontSize: "14px", lineHeight: 1.7 }}>
-          {course.detail.overview}
-        </p>
-        <div>
-          <h4 style={{ margin: "0 0 8px", fontSize: "13px", fontWeight: 800, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-            What you'll learn
-          </h4>
-          <ul style={{ margin: 0, paddingLeft: "18px", color: "#475569", fontSize: "13px", lineHeight: 2 }}>
-            {course.detail.syllabus.map((s) => <li key={s}>{s}</li>)}
-          </ul>
-        </div>
-        <div>
-          <h4 style={{ margin: "0 0 6px", fontSize: "13px", fontWeight: 800, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-            Outcome
-          </h4>
-          <p style={{ margin: 0, color: "#475569", fontSize: "13px", lineHeight: 1.7 }}>{course.detail.outcome}</p>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: "16px",
-            borderTop: "1px solid #f1f5f9",
-          }}
-        >
-          <span style={{ fontSize: "22px", fontWeight: 900, color: "#0f172a" }}>₹{course.price.toLocaleString("en-IN")}</span>
-          <button
-            onClick={() => alert("Enrollment coming soon! This is a demo page.")}
-            style={{
-              padding: "11px 24px",
-              background: "#e11d48",
-              color: "white",
-              border: "none",
-              borderRadius: "9999px",
-              fontWeight: 700,
-              fontSize: "12px",
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              cursor: "pointer",
-            }}
-          >
-            Enroll Now (Demo)
-          </button>
-        </div>
-      </div>
-    </MockModal>
   );
 }
 
 function Courses() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [search, setSearch] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeCourseModal, setActiveCourseModal] = useState(null);
 
-  const filtered = courses.filter((c) => {
-    const matchCat = activeCategory === "All" || c.category === activeCategory;
-    const matchSearch =
-      c.title.toLowerCase().includes(search.toLowerCase()) ||
-      c.description.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSearch;
-  });
+  useEffect(() => {
+    const courseParam = searchParams.get("course");
+    if (courseParam) {
+      setActiveCourseModal(courseParam);
+    }
+  }, [searchParams]);
+
+  const closeModal = () => {
+    setActiveCourseModal(null);
+    setSearchParams({});
+  };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc" }}>
-      <PageHero
-        label="STEMSAGE LEARNING // COURSE CATALOG"
-        heading="Learn. Build."
-        headingAccent="Master."
-        subtext="Hands-on STEM courses designed to turn curiosity into practical skills."
-        cta={{ label: "Explore Courses", href: "#course-catalog" }}
-      />
+    <main className="w-full bg-white font-sans text-slate-800">
+      {/* ─── Top Background Banner (Matching Services page style) ─── */}
+      <div className="relative h-[280px] sm:h-[360px] md:h-[420px] w-full overflow-hidden bg-slate-900">
+        <img
+          src={bannerBg}
+          alt="STEMSAGE Courses Banner"
+          className="h-full w-full object-cover object-center opacity-85 blur-[1px]"
+          onError={(e) => { e.currentTarget.src = eduKitBg; }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+      </div>
 
-      {/* Why STEMSAGE */}
-      <section style={{ background: "#0f172a", padding: "60px 0" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
-          <p
-            style={{
-              fontFamily: "monospace",
-              fontSize: "10px",
-              fontWeight: 700,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "#e11d48",
-              marginBottom: "12px",
-            }}
-          >
-            Why Learn With STEMSAGE
+      {/* ─── Floating White Intro Box (Matching Services / About screenshot style) ─── */}
+      <div className="relative z-10 mx-auto -mt-28 sm:-mt-36 md:-mt-48 max-w-4xl px-4 sm:px-6">
+        <div className="bg-white border border-slate-200/90 shadow-xl px-6 py-10 sm:px-12 sm:py-14 md:px-16 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-slate-900 mb-6">
+            Courses <span className="text-red-600 font-medium">Coming Soon</span>
+          </h1>
+          <p className="mx-auto max-w-3xl text-sm sm:text-base md:text-lg leading-relaxed text-slate-600 font-normal">
+            At STEMSAGE, we are dedicated to fostering hands-on STEM education. We are designing comprehensive, interactive courses in Electronics, IoT, Robotics, and 3D Design. Stay tuned as we prepare to launch our live learning tracks!
           </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: "24px",
-              marginTop: "32px",
-            }}
-          >
-            {[
-              { icon: "🛠️", title: "Hands-on Learning", desc: "Every concept is taught through doing, not just reading." },
-              { icon: "⚙️", title: "Industry-Relevant Tools", desc: "Work with tools and platforms used by real engineers." },
-              { icon: "📦", title: "Project-Based Curriculum", desc: "Each course ends with a portfolio-ready project." },
-              { icon: "🎯", title: "Mentor Guidance", desc: "Expert mentors available throughout your learning journey." },
-            ].map((item) => (
-              <div
-                key={item.title}
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: "12px",
-                  padding: "24px",
-                }}
-              >
-                <div style={{ fontSize: "28px", marginBottom: "12px" }}>{item.icon}</div>
-                <h4 style={{ margin: "0 0 8px", color: "white", fontSize: "14px", fontWeight: 800 }}>{item.title}</h4>
-                <p style={{ margin: 0, color: "#94a3b8", fontSize: "13px", lineHeight: 1.6 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Course Catalog */}
-      <section id="course-catalog" style={{ maxWidth: "1200px", margin: "0 auto", padding: "60px 24px" }}>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "16px",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginBottom: "32px",
-          }}
-        >
-          <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 900, color: "#0f172a" }}>
-            All Courses
-          </h2>
-          <input
-            type="text"
-            placeholder="Search courses..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{
-              padding: "10px 18px",
-              border: "2px solid #e2e8f0",
-              borderRadius: "9999px",
-              fontSize: "13px",
-              outline: "none",
-              minWidth: "220px",
-              color: "#0f172a",
-            }}
-          />
-        </div>
+      {/* Spacer for clean bottom margin */}
+      <div className="pb-24 sm:pb-32" />
 
-        <FilterBar categories={courseCategories} active={activeCategory} onChange={setActiveCategory} />
+      {/* Modal */}
+      <CourseComingSoonModal title={activeCourseModal} onClose={closeModal} />
 
-        {filtered.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "60px 0", color: "#94a3b8" }}>
-            No courses found for "{search}" in {activeCategory}.
-          </div>
-        ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-              gap: "24px",
-            }}
-          >
-            {filtered.map((course) => (
-              <CourseCard key={course.id} course={course} onView={setSelectedCourse} />
-            ))}
-          </div>
-        )}
-      </section>
-
-      <CourseDetailModal course={selectedCourse} onClose={() => setSelectedCourse(null)} />
+      {/* Footer */}
       <Footer />
-    </div>
+    </main>
   );
 }
 
