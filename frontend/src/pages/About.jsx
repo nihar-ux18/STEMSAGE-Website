@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/common/Footer";
 
 /**
  * AboutPage — Stemsage Techworld
@@ -259,46 +260,7 @@ export default function AboutPage() {
         </section>
       </main>
 
-      <footer className="sg-footer sg-container">
-        <div className="sg-footer__top">
-          <svg width="60" height="47" viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M2.5 5.5 4.31 20.5 12.42 5.42 22.5 20.5V5.5" stroke="#2c2c2c" strokeWidth="1.6" />
-          </svg>
-          <p>Email us at: stemsage.techworld.llp@gmail.com</p>
-          <p>Whatsapp or Call us on: +91-XXXXXXXXXX</p>
-        </div>
-
-        <hr />
-
-        <div className="sg-footer__grid">
-          <div className="sg-footer__col">
-            <p><strong>Company</strong></p>
-            <a href="/">Home</a>
-            <a href="/about">About us</a>
-          </div>
-          <div className="sg-footer__col">
-            <p><strong>Resources</strong></p>
-            <a href="/projects">Our projects</a>
-            <a href="/student-projects">Student projects</a>
-          </div>
-          <div className="sg-footer__col">
-            <p><strong>Address</strong></p>
-            <p>2nd Floor, R. C. Patel Institute of Technology, Shirpur, 425405</p>
-          </div>
-          <div className="sg-footer__col">
-            <p><strong> </strong></p>
-            <a href="/services">Services</a>
-            <a href="/courses">Courses</a>
-            <p>Workshops</p>
-            <a href="/gallery">Gallery</a>
-            <a href="/our-store">Contact us</a>
-          </div>
-        </div>
-
-        <div className="sg-footer__bottom">
-          ©️ {new Date().getFullYear()} Stemsage Techworld LLP · Privacy policy · Terms and Conditions
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
