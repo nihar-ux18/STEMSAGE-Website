@@ -51,26 +51,6 @@ const coursesMegaMenuColumns = [
       },
     ],
   },
-  {
-    id: 4,
-    categories: [
-      {
-        title: "Programming & Development",
-        items: [
-          { label: "Fundamentals of Programming", path: "/courses" },
-          { label: "C Programming for Beginners", path: "/courses" },
-          { label: "Fullstack Web development", path: "/courses" },
-          { label: "Static Web development", path: "/courses" },
-          { label: "App Development Masterclass", path: "/courses" },
-          { label: "Scratch Game Development with AI Worksho", path: "/courses" },
-        ],
-      },
-      {
-        title: "Tools Handling Mini Workshop",
-        items: [],
-      },
-    ],
-  },
 ];
 
 /* ─── Nav structure ─── */
@@ -103,10 +83,10 @@ function CoursesMegaMenu() {
         position: "absolute",
         top: "100%",
         left: "50%",
-        transform: "translateX(-42%)",
+        transform: "translateX(-45%)",
         paddingTop: "12px",
         zIndex: 100,
-        width: "900px",
+        width: "750px",
         maxWidth: "calc(100vw - 32px)",
       }}
     >
@@ -125,7 +105,7 @@ function CoursesMegaMenu() {
           style={{
             position: "absolute",
             top: "6px",
-            left: "42%",
+            left: "45%",
             transform: "translateX(-50%) rotate(45deg)",
             width: "12px",
             height: "12px",
@@ -135,7 +115,7 @@ function CoursesMegaMenu() {
           }}
         />
 
-        <div className="grid grid-cols-4 gap-8 text-left">
+        <div className="grid grid-cols-3 gap-8 text-left">
           {coursesMegaMenuColumns.map((col) => (
             <div key={col.id} className="flex flex-col gap-6">
               {col.categories.map((cat) => (
